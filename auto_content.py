@@ -1,83 +1,92 @@
-<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechGuide - Discover Top AI Tools & Automation Strategies</title>
-    <meta name="description" content="The ultimate directory for the best AI tools and automation strategies.">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        tailwind.config = { theme: { extend: { colors: { dark: '#0f172a', card: '#1e293b', primary: '#3b82f6', accent: '#8b5cf6' } } } }
-    </script>
-    <style>
-        body { font-family: system-ui, -apple-system, sans-serif; }
-        .gradient-text { background: linear-gradient(to right, #3b82f6, #8b5cf6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .ad-placeholder { background: repeating-linear-gradient(45deg, #1e293b, #1e293b 10px, #0f172a 10px, #0f172a 20px); border: 1px dashed #334155; }
-    </style>
-</head>
-<body class="bg-dark text-slate-300 min-h-screen flex flex-col">
-    <nav class="sticky top-0 z-50 bg-dark/80 backdrop-blur-md border-b border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <i data-lucide="cpu" class="text-primary w-8 h-8"></i>
-                <span class="text-xl font-bold text-white">Tech<span class="text-primary">Guide</span></span>
-            </div>
-            <div class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#" class="text-white hover:text-primary transition-colors">Home</a>
-                <a href="#ai-tools" class="text-slate-300 hover:text-primary transition-colors">AI Tools</a>
-                <a href="#tutorials" class="text-slate-300 hover:text-primary transition-colors">Tutorials</a>
-            </div>
-        </div>
-    </nav>
+import os
+import json
+import re
+from openai import OpenAI
+from datetime import datetime
 
-    <header class="relative pt-20 pb-16 text-center">
-        <div class="max-w-4xl mx-auto px-4 relative z-10">
-            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6">Discover <span class="gradient-text">Top AI Tools</span></h1>
-            <p class="text-slate-400 text-lg mb-10">Daily updated AI automation strategies and tool reviews.</p>
-        </div>
-    </header>
+# ==========================================
+# TechGuide Global - AI 内容全自动生成脚本
+# ==========================================
 
-    <main class="max-w-7xl mx-auto px-4 w-full">
-        <!-- 顶部广告位 -->
-        <div class="ad-placeholder w-full h-24 rounded-xl flex items-center justify-center text-slate-500 mb-12">
-            Google AdSense Placeholder
-        </div>
+# 1. 配置 AI API
+api_key = os.environ.get("AI_API_KEY")
+api_base = os.environ.get("AI_API_BASE", "https://api.moonshot.cn/v1") 
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
-            <div class="lg:col-span-2">
-                <h2 id="tutorials" class="text-2xl font-bold text-white mb-6">Latest Articles</h2>
-                
-                <!-- 🚀 极其重要：下面的注释是 AI 脚本识别的“投递口”，请勿删除 -->
-                <div id="article-list" class="space-y-4">
-                    <!-- AI_ARTICLE_ANCHOR -->
-                    
-                    <!-- 初始占位文章 -->
-                    <article class="bg-card p-5 rounded-2xl border border-slate-800 flex flex-col sm:flex-row gap-5">
-                        <div class="w-full sm:w-48 h-32 rounded-xl bg-slate-800 flex-shrink-0 flex items-center justify-center text-slate-600">
-                            <i data-lucide="image" class="w-8 h-8"></i>
+client = OpenAI(
+    api_key=api_key,
+    base_url=api_base
+)
+
+# 2. 撰写提示词
+prompt = """
+You are an expert tech blogger for TechGuide Global. 
+Generate a new, engaging short article snippet about a trending AI tool or an AI money-making strategy.
+The tone should be professional and exciting for a global audience.
+You MUST output ONLY a valid JSON object with the following structure:
+{
+  "title": "A catchy, SEO-friendly title",
+  "category": "One word: TOOLS, MONEY, or NEWS",
+  "description": "Two sentences explaining why this matters.",
+  "read_time": "e.g., 4 min"
+}
+"""
+
+def clean_json_response(text):
+    """移除可能存在的 Markdown 代码块标记"""
+    text = re.sub(r'```json\s*', '', text)
+    text = re.sub(r'```\s*', '', text)
+    return text.strip()
+
+try:
+    print(f"[{datetime.now()}] 正在呼叫 Kimi AI 生成内容...")
+    
+    # 3. 请求 AI
+    response = client.chat.completions.create(
+        model="moonshot-v1-8k",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant that outputs ONLY valid JSON."},
+            {"role": "user", "content": prompt}
+        ],
+        temperature=0.8
+    )
+    
+    raw_content = response.choices[0].message.content
+    cleaned_content = clean_json_response(raw_content)
+    data = json.loads(cleaned_content)
+    
+    print(f"成功生成文章: {data['title']}")
+
+    # 4. 构建插入网站的 HTML 代码块
+    new_article_html = f"""
+                    <!-- AI Generated Article: {datetime.now().strftime('%Y-%m-%d')} -->
+                    <article class="bg-card p-5 rounded-2xl border border-slate-800 hover:border-slate-600 transition-all flex flex-col sm:flex-row gap-5 cursor-pointer group">
+                        <div class="w-full sm:w-48 h-32 rounded-xl bg-gradient-to-br from-blue-600 to-purple-700 flex-shrink-0 flex items-center justify-center">
+                            <i data-lucide="zap" class="w-10 h-10 text-white/40"></i>
                         </div>
-                        <div class="flex flex-col justify-center">
-                            <span class="text-xs font-semibold text-primary uppercase">Welcome</span>
-                            <h3 class="text-lg font-bold text-white mt-1">TechGuideChina is Now Live!</h3>
-                            <p class="text-sm text-slate-400 mt-2">Start exploring our AI-curated tools and automation guides today.</p>
+                        <div class="flex flex-col justify-center flex-grow">
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded-full">{{data['category']}}</span>
+                                <span class="text-[10px] text-slate-500">NEW ARTICLE</span>
+                            </div>
+                            <h3 class="text-lg font-bold text-white group-hover:text-primary transition-colors">{{data['title']}}</h3>
+                            <p class="text-sm text-slate-400 mt-1 line-clamp-2">{{data['description']}}</p>
+                            <div class="mt-3 text-[10px] text-slate-500 uppercase tracking-widest">{{data['read_time']}} READ</div>
                         </div>
-                    </article>
-                </div>
-            </div>
+                    </article>"""
 
-            <aside class="space-y-6">
-                <div class="bg-card rounded-2xl border border-slate-800 p-6 h-64 flex items-center justify-center text-slate-500">
-                    Sidebar Ad
-                </div>
-            </aside>
-        </div>
-    </main>
+    # 5. 读取 index.html 并寻找锚点插入内容
+    with open('index.html', 'r', encoding='utf-8') as f:
+        html_content = f.read()
 
-    <footer class="mt-auto py-8 border-t border-slate-800 text-center text-sm text-slate-500">
-        &copy; 2024 TechGuide Global. Powered by AI.
-    </footer>
+    anchor = "<!-- AI_ARTICLE_ANCHOR -->"
+    
+    if anchor in html_content:
+        updated_html = html_content.replace(anchor, f"{anchor}\n{new_article_html}")
+        with open('index.html', 'w', encoding='utf-8') as f:
+            f.write(updated_html)
+        print("写入成功！")
+    else:
+        print("错误：在 index.html 中找不到锚点标记。")
 
-    <script>lucide.createIcons();</script>
-</body>
-</html>
+except Exception as e:
+    print(f"运行失败: {str(e)}")
