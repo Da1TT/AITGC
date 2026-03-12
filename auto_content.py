@@ -10,7 +10,11 @@ from datetime import datetime
 # ==========================================
 
 api_key = os.environ.get("AI_API_KEY")
-api_base = os.environ.get("AI_API_BASE", "https://api.moonshot.cn/v1") 
+api_base = os.environ.get("AI_API_BASE")
+
+# 修复核心：如果获取到的是空字符串（GitHub未配置此Secret时），则强制使用Kimi官方地址
+if not api_base or api_base.strip() == "":
+    api_base = "https://api.moonshot.cn/v1"
 
 if not api_key:
     print("❌ 错误：找不到 AI_API_KEY。")
@@ -133,7 +137,7 @@ try:
     # 2. 更新主页 index.html (插入可点击的链接卡片)
     # ==========================================
     new_card_html = f"""
-                    <!-- AI Generated Article: {datetime.now().strftime('%Y-%m-%d')} -->
+                    <!-- AI Generated Article: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} -->
                     <a href="{article_filename}" class="block hover-card bg-card p-5 rounded-2xl border border-slate-800 group">
                         <article class="flex flex-col sm:flex-row gap-5">
                             <div class="w-full sm:w-48 h-32 rounded-xl bg-gradient-to-br from-blue-600 to-purple-700 flex-shrink-0 flex items-center justify-center relative overflow-hidden">
