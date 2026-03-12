@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - TechGuide Global</title>
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = { theme: { extend: { colors: { dark: '#020617', primary: '#3b82f6' } } } }
+    </script>
+    <style>body { font-family: system-ui, -apple-system, sans-serif; }</style>
+</head>
+<body class="bg-dark text-slate-300 min-h-screen flex flex-col">
+    <!-- 简易导航 -->
+    <nav class="sticky top-0 z-50 bg-dark/90 backdrop-blur-md border-b border-slate-800">
+        <div class="max-w-4xl mx-auto px-4 h-16 flex items-center justify-between">
+            <a href="index.html" class="flex items-center gap-2 text-slate-400 hover:text-white transition-colors">
+                <i data-lucide="arrow-left" class="w-5 h-5"></i> Back to Home
+            </a>
+            <span class="text-white font-bold">TechGuide</span>
+        </div>
+    </nav>
+
+    <!-- 正文区域 -->
+    <main class="max-w-3xl mx-auto px-4 py-16 w-full flex-grow">
+        <div class="mb-10 text-center">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4">Terms of Service</h1>
+            <p class="text-slate-500">Please read these terms carefully before using our website.</p>
+        </div>
+
+        <article class="prose prose-invert prose-blue max-w-none prose-headings:text-white">
+            <h2>1. Terms</h2>
+            <p>By accessing this Website, accessible from our domain, you are agreeing to be bound by these Website Terms and Conditions of Use and agree that you are responsible for the agreement with any applicable local laws. If you disagree with any of these terms, you are prohibited from accessing this site.</p>
+
+            <h2>2. Disclaimer</h2>
+            <p>All the materials on TechGuide Global's Website are provided "as is". We make no warranties, may it be expressed or implied, therefore negates all other warranties. Furthermore, TechGuide Global does not make any representations concerning the accuracy or reliability of the use of the materials on its Website or otherwise relating to such materials or any sites linked to this Website.</p>
+            <p>Some tools or software reviewed on this site may be part of affiliate programs. This means we may earn a commission if you click on a link and make a purchase, at no additional cost to you. This helps support our automated AI systems and editorial team.</p>
+
+            <h2>3. Limitations</h2>
+            <p>TechGuide Global or its suppliers will not be hold accountable for any damages that will arise with the use or inability to use the materials on TechGuide Global's Website, even if TechGuide Global or an authorize representative of this Website has been notified, orally or written, of the possibility of such damage.</p>
+
+            <h2>4. Revisions and Errata</h2>
+            <p>The materials appearing on TechGuide Global's Website may include technical, typographical, or photographic errors. TechGuide Global will not promise that any of the materials in this Website are accurate, complete, or current. TechGuide Global may change the materials contained on its Website at any time without notice.</p>
+        </article>
+    </main>
+
+    <footer class="py-8 border-t border-slate-800 text-center text-sm text-slate-500">
+        &copy; 2024 TechGuide Global.
+    </footer>
+    <script>lucide.createIcons();</script>
+</body>
+</html>
