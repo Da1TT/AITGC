@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import re
 from openai import OpenAI
@@ -11,6 +12,10 @@ from datetime import datetime
 # 1. 配置 AI API
 api_key = os.environ.get("AI_API_KEY")
 api_base = os.environ.get("AI_API_BASE", "https://api.moonshot.cn/v1") 
+
+if not api_key:
+    print("❌ 严重错误：找不到 AI_API_KEY。请检查 GitHub Secrets 设置！")
+    sys.exit(1)
 
 client = OpenAI(
     api_key=api_key,
@@ -54,23 +59,23 @@ try:
     cleaned_content = clean_json_response(raw_content)
     data = json.loads(cleaned_content)
     
-    print(f"成功生成文章: {data['title']}")
+    print(f"✅ 成功生成文章: {data['title']}")
 
-    # 4. 构建插入网站的 HTML 代码块
+    # 4. 构建插入网站的 HTML 代码块 (修复了括号渲染问题)
     new_article_html = f"""
-                    <!-- AI Generated Article: {datetime.now().strftime('%Y-%m-%d')} -->
+                    <!-- AI Generated Article: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} -->
                     <article class="bg-card p-5 rounded-2xl border border-slate-800 hover:border-slate-600 transition-all flex flex-col sm:flex-row gap-5 cursor-pointer group">
                         <div class="w-full sm:w-48 h-32 rounded-xl bg-gradient-to-br from-blue-600 to-purple-700 flex-shrink-0 flex items-center justify-center">
                             <i data-lucide="zap" class="w-10 h-10 text-white/40"></i>
                         </div>
                         <div class="flex flex-col justify-center flex-grow">
                             <div class="flex items-center gap-2 mb-1">
-                                <span class="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded-full">{{data['category']}}</span>
+                                <span class="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded-full">{data['category']}</span>
                                 <span class="text-[10px] text-slate-500">NEW ARTICLE</span>
                             </div>
-                            <h3 class="text-lg font-bold text-white group-hover:text-primary transition-colors">{{data['title']}}</h3>
-                            <p class="text-sm text-slate-400 mt-1 line-clamp-2">{{data['description']}}</p>
-                            <div class="mt-3 text-[10px] text-slate-500 uppercase tracking-widest">{{data['read_time']}} READ</div>
+                            <h3 class="text-lg font-bold text-white group-hover:text-primary transition-colors">{data['title']}</h3>
+                            <p class="text-sm text-slate-400 mt-1 line-clamp-2">{data['description']}</p>
+                            <div class="mt-3 text-[10px] text-slate-500 uppercase tracking-widest">{data['read_time']} READ</div>
                         </div>
                     </article>"""
 
@@ -84,9 +89,12 @@ try:
         updated_html = html_content.replace(anchor, f"{anchor}\n{new_article_html}")
         with open('index.html', 'w', encoding='utf-8') as f:
             f.write(updated_html)
-        print("写入成功！")
+        print("🎉 写入 index.html 成功！")
     else:
-        print("错误：在 index.html 中找不到锚点标记。")
+        print("❌ 错误：在 index.html 中找不到投递标记 <!-- AI_ARTICLE_ANCHOR -->")
+        print("请检查你的 index.html 中是否包含这行精确的注释。")
+        sys.exit(1) # 找不到锚点，抛出错误中止任务
 
 except Exception as e:
-    print(f"运行失败: {str(e)}")
+    print(f"❌ 运行失败: {str(e)}")
+    sys.exit(1) # API或JSON解析失败，抛出错误中止任务
