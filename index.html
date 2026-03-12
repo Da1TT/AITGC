@@ -12,7 +12,7 @@
             theme: { 
                 extend: { 
                     colors: { 
-                        dark: '#020617', // 更深的极致暗黑背景
+                        dark: '#020617',
                         card: '#0f172a',
                         primary: '#3b82f6', 
                         accent: '#8b5cf6' 
@@ -26,7 +26,6 @@
         .text-glow { text-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
         .gradient-text { background: linear-gradient(to right, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .ad-placeholder { background: repeating-linear-gradient(45deg, #0f172a, #0f172a 10px, #020617 10px, #020617 20px); border: 1px dashed #334155; }
-        /* 丝滑的卡片动效 */
         .glass-card { background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.05); }
     </style>
 </head>
@@ -53,7 +52,6 @@
 
     <!-- 霸气的主视觉区 -->
     <header class="relative pt-32 pb-24 overflow-hidden">
-        <!-- 背景光晕 -->
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-blue-600/20 blur-[120px] rounded-full -z-10 pointer-events-none"></div>
         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-purple-600/10 blur-[100px] rounded-full -z-10 pointer-events-none"></div>
         
@@ -74,7 +72,7 @@
 
     <main class="max-w-7xl mx-auto px-4 w-full flex-grow">
         
-        <!-- 顶级工具推荐 (适合挂高佣金联盟链接) -->
+        <!-- 顶级工具推荐 -->
         <section id="ai-tools" class="mb-24">
             <div class="flex items-end justify-between mb-8">
                 <h2 class="text-3xl font-bold text-white tracking-tight">Editors' Picks</h2>
@@ -117,7 +115,6 @@
             <div class="lg:col-span-8">
                 <div class="flex items-center justify-between mb-8 border-b border-slate-800 pb-4">
                     <h2 id="latest" class="text-3xl font-bold text-white tracking-tight">Latest Strategies</h2>
-                    <!-- 假装有分类筛选器，提升视觉丰富度 -->
                     <div class="hidden sm:flex gap-4 text-sm font-medium">
                         <span class="text-white border-b-2 border-primary pb-1 cursor-pointer">All</span>
                         <span class="text-slate-500 hover:text-white transition-colors cursor-pointer">Money</span>
@@ -127,229 +124,21 @@
                 
                 <div id="article-list" class="space-y-6">
                     <!-- AI_ARTICLE_ANCHOR -->
-
-                    <!-- AI Generated Article -->
-                    <a href="articles/ranking-supreme-top-ai-tools-for-seo-and-fast-google-visibility.html" class="block bg-slate-900/50 hover:bg-slate-800/80 p-5 rounded-2xl border border-slate-800 hover:border-primary/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:shadow-primary/10 hover:-translate-y-1">
-                        <article class="flex flex-col sm:flex-row gap-5">
-                            <div class="w-full sm:w-48 h-32 rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex-shrink-0 flex items-center justify-center relative overflow-hidden">
-                                <i data-lucide="cpu" class="w-10 h-10 text-white/50 group-hover:scale-125 group-hover:text-white/80 transition-all duration-500"></i>
-                            </div>
-                            <div class="flex flex-col justify-center flex-grow">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded-md uppercase">TOOLS</span>
-                                    <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>NEW</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-slate-100 group-hover:text-primary transition-colors leading-tight">Ranking Supreme: Top AI Tools for SEO and Fast Google Visibility</h3>
-                                <p class="text-sm text-slate-400 mt-2 line-clamp-2">Boost your online presence with these cutting-edge AI tools designed to skyrocket your SEO rankings on Google. Discover how these innovative solutions can revolutionize your digital marketing strategy.</p>
-                                <div class="mt-4 text-[11px] text-slate-500 font-medium tracking-wide flex items-center gap-4">
-                                    <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Mar 12</span>
-                                    <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7 min READ</span>
-                                </div>
-                            </div>
-                        </article>
-                    </a>
-
-                    <!-- AI Generated Article -->
-                    <a href="articles/unlocking-passive-income-ai-art-and-midjourney.html" class="block bg-slate-900/50 hover:bg-slate-800/80 p-5 rounded-2xl border border-slate-800 hover:border-primary/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:shadow-primary/10 hover:-translate-y-1">
-                        <article class="flex flex-col sm:flex-row gap-5">
-                            <div class="w-full sm:w-48 h-32 rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex-shrink-0 flex items-center justify-center relative overflow-hidden">
-                                <i data-lucide="cpu" class="w-10 h-10 text-white/50 group-hover:scale-125 group-hover:text-white/80 transition-all duration-500"></i>
-                            </div>
-                            <div class="flex flex-col justify-center flex-grow">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded-md uppercase">TOOLS</span>
-                                    <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>NEW</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-slate-100 group-hover:text-primary transition-colors leading-tight">Unlocking Passive Income: AI Art and Midjourney</h3>
-                                <p class="text-sm text-slate-400 mt-2 line-clamp-2">Dive into the world of AI-generated art and learn how to harness the power of Midjourney to create passive income streams. This comprehensive guide will take you through the steps to monetize your creativity.</p>
-                                <div class="mt-4 text-[11px] text-slate-500 font-medium tracking-wide flex items-center gap-4">
-                                    <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Mar 12</span>
-                                    <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7 min READ</span>
-                                </div>
-                            </div>
-                        </article>
-                    </a>
-
-                    <!-- AI Generated Article -->
-                    <a href="articles/master-ai-voice-cloning-and-monetize-smartly.html" class="block bg-slate-900/50 hover:bg-slate-800/80 p-5 rounded-2xl border border-slate-800 hover:border-primary/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:shadow-primary/10 hover:-translate-y-1">
-                        <article class="flex flex-col sm:flex-row gap-5">
-                            <div class="w-full sm:w-48 h-32 rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex-shrink-0 flex items-center justify-center relative overflow-hidden">
-                                <i data-lucide="cpu" class="w-10 h-10 text-white/50 group-hover:scale-125 group-hover:text-white/80 transition-all duration-500"></i>
-                            </div>
-                            <div class="flex flex-col justify-center flex-grow">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded-md uppercase">TOOLS</span>
-                                    <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>NEW</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-slate-100 group-hover:text-primary transition-colors leading-tight">Master AI Voice Cloning and Monetize Smartly: The Ultimate Guide</h3>
-                                <p class="text-sm text-slate-400 mt-2 line-clamp-2">Discover the cutting-edge techniques of AI voice cloning and learn how you can leverage this technology for effective monetization in today's digital age.</p>
-                                <div class="mt-4 text-[11px] text-slate-500 font-medium tracking-wide flex items-center gap-4">
-                                    <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Mar 12</span>
-                                    <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7 min READ</span>
-                                </div>
-                            </div>
-                        </article>
-                    </a>
-
-                    <!-- AI Generated Article -->
-                    <a href="articles/kickstarting-your-ai-automation-agency-for-maximum-impact.html" class="block bg-slate-900/50 hover:bg-slate-800/80 p-5 rounded-2xl border border-slate-800 hover:border-primary/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:shadow-primary/10 hover:-translate-y-1">
-                        <article class="flex flex-col sm:flex-row gap-5">
-                            <div class="w-full sm:w-48 h-32 rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex-shrink-0 flex items-center justify-center relative overflow-hidden">
-                                <i data-lucide="cpu" class="w-10 h-10 text-white/50 group-hover:scale-125 group-hover:text-white/80 transition-all duration-500"></i>
-                            </div>
-                            <div class="flex flex-col justify-center flex-grow">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded-md uppercase">TOOLS</span>
-                                    <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>NEW</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-slate-100 group-hover:text-primary transition-colors leading-tight">Kickstarting Your AI Automation Agency for Maximum Impact</h3>
-                                <p class="text-sm text-slate-400 mt-2 line-clamp-2">Dive into the world of AI automation and learn how to establish a successful AI Automation Agency from scratch. This guide is your key to unlocking the potential of AI in business.</p>
-                                <div class="mt-4 text-[11px] text-slate-500 font-medium tracking-wide flex items-center gap-4">
-                                    <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Mar 12</span>
-                                    <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 10 min READ</span>
-                                </div>
-                            </div>
-                        </article>
-                    </a>
-
-                    <!-- AI Generated Article -->
-                    <a href="articles/unlock-power-of-ai-top-tools-for-automated-youtube-shorts-creation.html" class="block bg-slate-900/50 hover:bg-slate-800/80 p-5 rounded-2xl border border-slate-800 hover:border-primary/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:shadow-primary/10 hover:-translate-y-1">
-                        <article class="flex flex-col sm:flex-row gap-5">
-                            <div class="w-full sm:w-48 h-32 rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex-shrink-0 flex items-center justify-center relative overflow-hidden">
-                                <i data-lucide="cpu" class="w-10 h-10 text-white/50 group-hover:scale-125 group-hover:text-white/80 transition-all duration-500"></i>
-                            </div>
-                            <div class="flex flex-col justify-center flex-grow">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded-md uppercase">TOOLS</span>
-                                    <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>NEW</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-slate-100 group-hover:text-primary transition-colors leading-tight">Unlock the Power of AI: Top Tools for Automated YouTube Shorts Creation</h3>
-                                <p class="text-sm text-slate-400 mt-2 line-clamp-2">Dive into the world of AI-driven automation and discover the best AI tools to create dynamic YouTube Shorts with ease and efficiency.</p>
-                                <div class="mt-4 text-[11px] text-slate-500 font-medium tracking-wide flex items-center gap-4">
-                                    <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Mar 12</span>
-                                    <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 6 min READ</span>
-                                </div>
-                            </div>
-                        </article>
-                    </a>
-
-                    <!-- AI Generated Article -->
-                    <a href="articles/harnessing-the-power-of-ai-building-no-code-apps-with-website-builders.html" class="block bg-slate-900/50 hover:bg-slate-800/80 p-5 rounded-2xl border border-slate-800 hover:border-primary/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:shadow-primary/10 hover:-translate-y-1">
-                        <article class="flex flex-col sm:flex-row gap-5">
-                            <div class="w-full sm:w-48 h-32 rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex-shrink-0 flex items-center justify-center relative overflow-hidden">
-                                <i data-lucide="cpu" class="w-10 h-10 text-white/50 group-hover:scale-125 group-hover:text-white/80 transition-all duration-500"></i>
-                            </div>
-                            <div class="flex flex-col justify-center flex-grow">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded-md uppercase">TOOLS</span>
-                                    <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>NEW</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-slate-100 group-hover:text-primary transition-colors leading-tight">Harnessing the Power of AI: Building No-Code Apps with Website Builders</h3>
-                                <p class="text-sm text-slate-400 mt-2 line-clamp-2">Discover the cutting-edge world of no-code app development using AI-driven website builders, revolutionizing how we create, launch, and scale applications.</p>
-                                <div class="mt-4 text-[11px] text-slate-500 font-medium tracking-wide flex items-center gap-4">
-                                    <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Mar 12</span>
-                                    <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7 min READ</span>
-                                </div>
-                            </div>
-                        </article>
-                    </a>
-
-                    <!-- AI Generated Article -->
-                    <a href="articles/harnessing-ai-future-social-media-management.html" class="block bg-slate-900/50 hover:bg-slate-800/80 p-5 rounded-2xl border border-slate-800 hover:border-primary/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:shadow-primary/10 hover:-translate-y-1">
-                        <article class="flex flex-col sm:flex-row gap-5">
-                            <div class="w-full sm:w-48 h-32 rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex-shrink-0 flex items-center justify-center relative overflow-hidden">
-                                <i data-lucide="cpu" class="w-10 h-10 text-white/50 group-hover:scale-125 group-hover:text-white/80 transition-all duration-500"></i>
-                            </div>
-                            <div class="flex flex-col justify-center flex-grow">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded-md uppercase">TOOLS</span>
-                                    <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>NEW</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-slate-100 group-hover:text-primary transition-colors leading-tight">Harnessing AI: The Future of Social Media Management</h3>
-                                <p class="text-sm text-slate-400 mt-2 line-clamp-2">Discover how AI is revolutionizing social media management, automating tasks, and driving engagement effectively.</p>
-                                <div class="mt-4 text-[11px] text-slate-500 font-medium tracking-wide flex items-center gap-4">
-                                    <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Mar 12</span>
-                                    <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7 min READ</span>
-                                </div>
-                            </div>
-                        </article>
-                    </a>
-
-                    <!-- AI Generated Article -->
-                    <a href="articles/mastering-chatgpt-prompt-engineering-for-high-converting-copywriting.html" class="block bg-slate-900/50 hover:bg-slate-800/80 p-5 rounded-2xl border border-slate-800 hover:border-primary/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:shadow-primary/10 hover:-translate-y-1">
-                        <article class="flex flex-col sm:flex-row gap-5">
-                            <div class="w-full sm:w-48 h-32 rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex-shrink-0 flex items-center justify-center relative overflow-hidden">
-                                <i data-lucide="cpu" class="w-10 h-10 text-white/50 group-hover:scale-125 group-hover:text-white/80 transition-all duration-500"></i>
-                            </div>
-                            <div class="flex flex-col justify-center flex-grow">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded-md uppercase">TOOLS</span>
-                                    <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>NEW</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-slate-100 group-hover:text-primary transition-colors leading-tight">Mastering ChatGPT Prompt Engineering for High-Converting Copywriting</h3>
-                                <p class="text-sm text-slate-400 mt-2 line-clamp-2">Learn how to leverage ChatGPT's prompt engineering to craft compelling copy that converts. Discover actionable tips to enhance your marketing strategy in this comprehensive guide.</p>
-                                <div class="mt-4 text-[11px] text-slate-500 font-medium tracking-wide flex items-center gap-4">
-                                    <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Mar 12</span>
-                                    <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7 min READ</span>
-                                </div>
-                            </div>
-                        </article>
-                    </a>
-
-                    <!-- AI Generated Article -->
-                    <a href="articles/harness-power-of-ai-write-code-no-programming-background-required.html" class="block bg-slate-900/50 hover:bg-slate-800/80 p-5 rounded-2xl border border-slate-800 hover:border-primary/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:shadow-primary/10 hover:-translate-y-1">
-                        <article class="flex flex-col sm:flex-row gap-5">
-                            <div class="w-full sm:w-48 h-32 rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex-shrink-0 flex items-center justify-center relative overflow-hidden">
-                                <i data-lucide="cpu" class="w-10 h-10 text-white/50 group-hover:scale-125 group-hover:text-white/80 transition-all duration-500"></i>
-                            </div>
-                            <div class="flex flex-col justify-center flex-grow">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded-md uppercase">TOOLS</span>
-                                    <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>NEW</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-slate-100 group-hover:text-primary transition-colors leading-tight">Harness the Power of AI to Write Code - No Programming Background Required</h3>
-                                <p class="text-sm text-slate-400 mt-2 line-clamp-2">Discover how AI can revolutionize the way we write code, even if you have no coding experience. This comprehensive guide provides actionable insights and exciting possibilities for non-programmers.</p>
-                                <div class="mt-4 text-[11px] text-slate-500 font-medium tracking-wide flex items-center gap-4">
-                                    <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Mar 12</span>
-                                    <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7 min READ</span>
-                                </div>
-                            </div>
-                        </article>
-                    </a>
-
-                    <!-- AI Generated Article -->
-                    <a href="articles/mastering-claude-3-data-analysis-finance.html" class="block bg-slate-900/50 hover:bg-slate-800/80 p-5 rounded-2xl border border-slate-800 hover:border-primary/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:shadow-primary/10 hover:-translate-y-1">
-                        <article class="flex flex-col sm:flex-row gap-5">
-                            <div class="w-full sm:w-48 h-32 rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex-shrink-0 flex items-center justify-center relative overflow-hidden">
-                                <i data-lucide="cpu" class="w-10 h-10 text-white/50 group-hover:scale-125 group-hover:text-white/80 transition-all duration-500"></i>
-                            </div>
-                            <div class="flex flex-col justify-center flex-grow">
-                                <div class="flex items-center gap-2 mb-2">
-                                    <span class="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded-md uppercase">TOOLS</span>
-                                    <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>NEW</span>
-                                </div>
-                                <h3 class="text-xl font-bold text-slate-100 group-hover:text-primary transition-colors leading-tight">Mastering Claude 3: Unleashing the Power for Data Analysis and Finance</h3>
-                                <p class="text-sm text-slate-400 mt-2 line-clamp-2">Dive into the advanced world of Claude 3, a cutting-edge platform that revolutionizes data analysis and financial forecasting. Learn how to harness its capabilities for transformative insights.</p>
-                                <div class="mt-4 text-[11px] text-slate-500 font-medium tracking-wide flex items-center gap-4">
-                                    <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> Mar 12</span>
-                                    <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> 7 min READ</span>
-                                </div>
-                            </div>
-                        </article>
-                    </a>
                     
-                    <!-- 托底说明文章 -->
+                    <!-- 托底说明文章 (带精美配图) -->
                     <a href="#" class="block bg-slate-900/50 hover:bg-slate-800/80 p-5 rounded-2xl border border-slate-800 hover:border-slate-600 transition-all duration-300 group">
                         <article class="flex flex-col sm:flex-row gap-6">
-                            <div class="w-full sm:w-56 h-36 rounded-xl bg-slate-800 flex-shrink-0 flex items-center justify-center text-slate-600 relative overflow-hidden">
-                                <i data-lucide="globe" class="w-10 h-10"></i>
+                            <div class="w-full sm:w-56 h-40 rounded-xl bg-slate-800 flex-shrink-0 relative overflow-hidden shadow-lg">
+                                <!-- 引入了动态的配图 -->
+                                <img src="https://picsum.photos/seed/techguide/600/400" alt="Thumbnail" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out">
+                                <div class="absolute inset-0 bg-gradient-to-t from-dark/80 to-transparent"></div>
                             </div>
                             <div class="flex flex-col justify-center flex-grow py-1">
                                 <div class="flex items-center gap-2 mb-2">
                                     <span class="text-[10px] font-bold text-slate-400 px-2 py-0.5 bg-slate-800 rounded-md uppercase">SYSTEM</span>
                                 </div>
                                 <h3 class="text-xl font-bold text-white group-hover:text-primary transition-colors leading-tight">Welcome to TechGuide 3.0 Platform</h3>
-                                <p class="text-sm text-slate-400 mt-2 line-clamp-2">This is the end of the content feed. More automated AI articles will be populated above this card shortly.</p>
+                                <p class="text-sm text-slate-400 mt-2 line-clamp-2">This is the end of the content feed. More automated AI articles with beautiful cover images will be populated above this card shortly.</p>
                                 <div class="mt-4 text-[11px] text-slate-500 font-medium tracking-wide flex items-center gap-4">
                                     <span>System Admin</span>
                                 </div>
@@ -361,7 +150,7 @@
 
             <!-- 右侧边栏 -->
             <aside class="lg:col-span-4 space-y-8">
-                <!-- 专业感极强的 Newsletter -->
+                <!-- Newsletter -->
                 <div class="glass-card rounded-3xl p-8 relative overflow-hidden">
                     <div class="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl -z-10"></div>
                     <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mb-6">
@@ -375,7 +164,7 @@
                     </form>
                 </div>
 
-                <!-- 侧边栏广告方块 -->
+                <!-- 侧边栏广告 -->
                 <div class="w-full aspect-square bg-slate-900 border border-slate-800 rounded-3xl flex items-center justify-center text-slate-600 shadow-inner">
                     <div class="text-center">
                         <i data-lucide="layout-template" class="w-8 h-8 mx-auto mb-2 opacity-30"></i>
@@ -383,7 +172,7 @@
                     </div>
                 </div>
 
-                <!-- 热门标签池 (SEO 核心) -->
+                <!-- 热门标签 -->
                 <div>
                     <h3 class="text-sm font-bold text-white uppercase tracking-widest mb-4">Popular Topics</h3>
                     <div class="flex flex-wrap gap-2">
@@ -391,27 +180,10 @@
                         <span class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 cursor-pointer rounded-lg text-xs font-medium text-slate-400 transition-colors border border-slate-800">Passive Income</span>
                         <span class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 cursor-pointer rounded-lg text-xs font-medium text-slate-400 transition-colors border border-slate-800">SEO Automation</span>
                         <span class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 cursor-pointer rounded-lg text-xs font-medium text-slate-400 transition-colors border border-slate-800">Midjourney V6</span>
-                        <span class="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 cursor-pointer rounded-lg text-xs font-medium text-slate-400 transition-colors border border-slate-800">GPT-4 Hacks</span>
                     </div>
                 </div>
             </aside>
         </div>
-        
-        <!-- SEO 友好的 FAQ 区域 -->
-        <section class="mb-24 border-t border-slate-800 pt-16">
-            <h2 class="text-2xl font-bold text-center text-white mb-12">Frequently Asked Questions</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-                <div>
-                    <h4 class="text-lg font-bold text-slate-200 mb-2">How do you select the AI tools?</h4>
-                    <p class="text-slate-500 text-sm leading-relaxed">Our automated agents constantly scan the market, testing tools for usability, pricing, and genuine ROI before featuring them on our platform.</p>
-                </div>
-                <div>
-                    <h4 class="text-lg font-bold text-slate-200 mb-2">Is the content updated daily?</h4>
-                    <p class="text-slate-500 text-sm leading-relaxed">Yes. We utilize advanced AI workflows to generate, curate, and publish the most up-to-date strategies in the artificial intelligence sector every single day.</p>
-                </div>
-            </div>
-        </section>
-
     </main>
 
     <footer class="bg-slate-950 py-12 border-t border-slate-900">
@@ -428,16 +200,17 @@
             <div>
                 <h4 class="text-slate-200 font-bold mb-4">Company</h4>
                 <ul class="space-y-2 text-sm text-slate-500">
-                    <li><a href="#" class="hover:text-primary transition-colors">About Us</a></li>
-                    <li><a href="#" class="hover:text-primary transition-colors">Contact</a></li>
+                    <!-- 已经替换为真实的页面链接 -->
+                    <li><a href="about.html" class="hover:text-primary transition-colors">About Us / Contact</a></li>
                     <li><a href="#" class="hover:text-primary transition-colors">Submit Tool</a></li>
                 </ul>
             </div>
             <div>
                 <h4 class="text-slate-200 font-bold mb-4">Legal</h4>
                 <ul class="space-y-2 text-sm text-slate-500">
-                    <li><a href="#" class="hover:text-primary transition-colors">Privacy Policy</a></li>
-                    <li><a href="#" class="hover:text-primary transition-colors">Terms of Service</a></li>
+                    <!-- 已经替换为真实的页面链接 -->
+                    <li><a href="privacy.html" class="hover:text-primary transition-colors">Privacy Policy</a></li>
+                    <li><a href="terms.html" class="hover:text-primary transition-colors">Terms of Service</a></li>
                     <li><a href="#" class="hover:text-primary transition-colors">Disclaimer</a></li>
                 </ul>
             </div>
