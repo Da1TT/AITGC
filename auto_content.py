@@ -8,7 +8,7 @@ from openai import OpenAI
 from datetime import datetime
 
 # ==========================================
-# TechGuide Global 3.0 - 批量深度文章生成器
+# TechGuide Global 3.0 - 批量深度文章生成器 (带配图版)
 # ==========================================
 
 api_key = os.environ.get("AI_API_KEY")
@@ -23,7 +23,7 @@ if not api_key:
 
 client = OpenAI(api_key=api_key, base_url=api_base)
 
-# 准备 10 个不同的爆款话题方向，确保每次生成的文章都不一样
+# 话题池
 topics_pool = [
     "How to make passive income with AI art and Midjourney",
     "Best AI tools for automated YouTube Shorts creation",
@@ -36,8 +36,6 @@ topics_pool = [
     "How to use Claude 3 for data analysis and finance",
     "Automating social media management with AI agents"
 ]
-
-# 打乱话题顺序
 random.shuffle(topics_pool)
 
 def clean_json_response(text):
@@ -45,7 +43,6 @@ def clean_json_response(text):
     text = re.sub(r'^```\s*', '', text, flags=re.MULTILINE)
     return text.strip()
 
-# 读取主页内容
 with open('index.html', 'r', encoding='utf-8') as f:
     html_content = f.read()
 
@@ -59,7 +56,6 @@ os.makedirs(articles_dir, exist_ok=True)
 
 success_count = 0
 
-# 循环 10 次，生成 10 篇文章
 for i in range(10):
     current_topic = topics_pool[i]
     print(f"\n[{datetime.now()}] 🚀 正在生成第 {i+1}/10 篇文章: {current_topic}")
@@ -97,7 +93,11 @@ for i in range(10):
         slug = data['slug'].lower().replace(' ', '-')
         article_filename = f"{articles_dir}/{slug}.html"
         
-        # 1. 构建独立的 HTML 文章页面
+        # 智能配图 URL (基于 slug 生成唯一的随机图片)
+        cover_image_url = f"https://picsum.photos/seed/{slug}/1200/600"
+        thumbnail_url = f"https://picsum.photos/seed/{slug}/600/400"
+        
+        # 1. 构建独立的 HTML 文章页面 (顶部加入了宽幅超大配图)
         full_article_html = f"""<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -123,11 +123,15 @@ for i in range(10):
         <div class="mb-8">
             <span class="text-xs font-bold text-primary px-3 py-1 bg-primary/10 rounded-full uppercase tracking-wider">{data['category']}</span>
             <h1 class="text-4xl md:text-5xl font-extrabold text-white mt-6 mb-4 leading-tight">{title}</h1>
-            <div class="flex items-center gap-4 text-sm text-slate-500">
+            <div class="flex items-center gap-4 text-sm text-slate-500 mb-8">
                 <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-4 h-4"></i> {datetime.now().strftime('%B %d, %Y')}</span>
                 <span class="flex items-center gap-1"><i data-lucide="clock" class="w-4 h-4"></i> {data['read_time']} read</span>
             </div>
+            
+            <!-- 插入文章头图 -->
+            <img src="{cover_image_url}" alt="{title}" class="w-full h-[300px] md:h-[400px] object-cover rounded-3xl mb-10 shadow-2xl shadow-black/50">
         </div>
+        
         <div class="w-full h-24 bg-slate-800/30 border border-slate-700/50 rounded-xl flex items-center justify-center text-slate-500 mb-10">
             AdSense Content Banner
         </div>
@@ -145,15 +149,18 @@ for i in range(10):
         with open(article_filename, 'w', encoding='utf-8') as f:
             f.write(full_article_html)
             
-        # 2. 构建主页的文章卡片
+        # 2. 构建主页的文章卡片 (带有缩略图)
         new_card_html = f"""
                     <!-- AI Generated Article -->
-                    <a href="{article_filename}" class="block bg-slate-900/50 hover:bg-slate-800/80 p-5 rounded-2xl border border-slate-800 hover:border-primary/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:shadow-primary/10 hover:-translate-y-1">
-                        <article class="flex flex-col sm:flex-row gap-5">
-                            <div class="w-full sm:w-48 h-32 rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-blue-600 flex-shrink-0 flex items-center justify-center relative overflow-hidden">
-                                <i data-lucide="cpu" class="w-10 h-10 text-white/50 group-hover:scale-125 group-hover:text-white/80 transition-all duration-500"></i>
+                    <a href="{article_filename}" class="block bg-slate-900/50 hover:bg-slate-800/80 p-5 rounded-2xl border border-slate-800 hover:border-primary/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:-translate-y-1">
+                        <article class="flex flex-col sm:flex-row gap-6">
+                            <!-- 带有图片的缩略图区域 -->
+                            <div class="w-full sm:w-56 h-40 rounded-xl bg-slate-800 flex-shrink-0 relative overflow-hidden shadow-lg">
+                                <img src="{thumbnail_url}" alt="{title}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out">
+                                <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent"></div>
                             </div>
-                            <div class="flex flex-col justify-center flex-grow">
+                            
+                            <div class="flex flex-col justify-center flex-grow py-1">
                                 <div class="flex items-center gap-2 mb-2">
                                     <span class="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded-md uppercase">{data['category']}</span>
                                     <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>NEW</span>
@@ -168,12 +175,10 @@ for i in range(10):
                         </article>
                     </a>"""
         
-        # 将新卡片插入到 HTML 内存字符串中
         html_content = html_content.replace(anchor, f"{anchor}\n{new_card_html}")
         print(f"✅ 第 {i+1} 篇生成成功: {title}")
         success_count += 1
         
-        # ⚠️ 极度重要：暂停 5 秒，防止触发 Kimi API 的频率限制 (Rate Limit) 封号
         if i < 9:
             print("⏳ 等待 5 秒以防 API 频率受限...")
             time.sleep(5)
@@ -182,7 +187,6 @@ for i in range(10):
         print(f"❌ 第 {i+1} 篇生成失败，跳过: {str(e)}")
         continue
 
-# 循环结束后，一次性将所有更新写入 index.html
 if success_count > 0:
     with open('index.html', 'w', encoding='utf-8') as f:
         f.write(html_content)
