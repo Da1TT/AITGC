@@ -28,12 +28,13 @@ jobs:
       - name: Run AI Script
         env:
           AI_API_KEY: ${{ secrets.AI_API_KEY }}
+          AI_API_BASE: ${{ secrets.AI_API_BASE }}
         run: python auto_content.py
         
       - name: Commit and Push changes
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add index.html
-          git commit -m "🤖 Auto-update: Added new AI generated article" || exit 0
+          git add -A
+          git commit -m "🤖 Auto-update: Added new AI generated article page" || exit 0
           git push
