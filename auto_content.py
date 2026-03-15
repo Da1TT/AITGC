@@ -8,7 +8,7 @@ from datetime import datetime
 import random
 
 # ==========================================
-# TechGuide - 自动化发文引擎 (重试增强 + 高级UI适配)
+# TechGuide - 自动化发文引擎 (批量生成10篇增强版)
 # ==========================================
 
 api_key = os.environ.get("AI_API_KEY")
@@ -29,18 +29,19 @@ client = OpenAI(
     base_url=api_base
 )
 
-prompt = """
-You are an expert tech blogger and SEO specialist. 
-Write a comprehensive, highly engaging tech blog post (at least 400 words) about a trending AI tool, AI automation strategy, or prompt engineering.
-Output ONLY a valid JSON object with the following structure:
-{
-  "title": "A catchy, SEO-friendly title (e.g., Mastering AI Voice Cloning...)",
-  "category": "One word: TOOLS, STRATEGY, or MONEY",
-  "description": "Two sentences explaining the value of the guide.",
-  "read_time": "e.g., 7 min",
-  "content": "The full article body formatted in valid HTML. Use <h2> for subheadings, <p> for paragraphs, and <ul> for lists. Do NOT include <html> or <body> tags, just the inner content. Make it highly readable."
-}
-"""
+# 核心升级：10个高转化率的垂直领域主题池，防止 AI 生成重复内容
+niche_topics = [
+    "AI tools for SEO automation and rapid Google ranking",
+    "Monetizing AI art and Midjourney for passive income",
+    "Advanced ChatGPT prompt engineering for high-converting copywriting",
+    "AI video creation tools for automated YouTube Shorts",
+    "No-code AI app building and SaaS development for beginners",
+    "Harnessing AI for social media management and viral growth",
+    "AI voice cloning tools and audio monetization strategies",
+    "Top AI productivity hacks for digital entrepreneurs",
+    "Using AI models like Claude 3 for data analysis and finance",
+    "How to start and scale an AI Automation Agency (AIAA)"
+]
 
 def clean_json_response(text):
     text = re.sub(r'```json\s*', '', text)
@@ -52,52 +53,75 @@ image_pool = [
     "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=600&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1684369175836-e8f000305f24?q=80&w=600&auto=format&fit=crop",
     "https://images.unsplash.com/photo-1696258686454-60082b2c33e2?q=80&w=600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1655635643532-fa9ba2648cbe?q=80&w=600&auto=format&fit=crop"
+    "https://images.unsplash.com/photo-1655635643532-fa9ba2648cbe?q=80&w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600&auto=format&fit=crop",
+    "https://images.unsplash.com/photo-1676299081847-824916de030a?q=80&w=600&auto=format&fit=crop"
 ]
 
 MAX_RETRIES = 3
-data = None
+# 用于存储10篇文章的主页卡片HTML
+all_cards_html = ""
 
-# 加入企业级重试机制，抵抗网络波动
-for attempt in range(MAX_RETRIES):
-    try:
-        print(f"[{datetime.now()}] 正在呼叫 AI 撰写深度长文 (第 {attempt + 1} 次尝试)...")
-        response = client.chat.completions.create(
-            model="moonshot-v1-8k",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant that outputs ONLY valid JSON."},
-                {"role": "user", "content": prompt}
-            ],
-            temperature=0.7,
-            timeout=45.0  # 增加超时时间
-        )
-        
-        raw_content = response.choices[0].message.content
-        cleaned_content = clean_json_response(raw_content)
-        data = json.loads(cleaned_content)
-        print(f"✅ 成功生成文章: {data['title']}")
-        break  # 成功则跳出循环
-        
-    except Exception as e:
-        print(f"⚠️ 第 {attempt + 1} 次请求失败: {e}")
-        if attempt == MAX_RETRIES - 1:
-            print("❌ 达到最大重试次数，网络彻底断开。请检查你的 API_BASE 网址是否已失效。")
-            sys.exit(1)
-        time.sleep(5) # 失败后等待 5 秒再重试
-
-# 如果数据正常，开始构建网页
-if data:
-    date_str = datetime.now().strftime('%b %d')
-    random_image = random.choice(image_pool)
-
-    # 1. 生成独立的 HTML 文章页面 (适配你的 Dark Mode 风格)
-    safe_title = "".join([c if c.isalnum() else "-" for c in data['title'].lower()])
-    safe_title = re.sub(r'-+', '-', safe_title).strip('-')
-    file_name = f"{safe_title}.html"
+# 开始循环10次，每次取出一个主题
+for index, topic in enumerate(niche_topics):
+    print(f"\n==========================================")
+    print(f"🚀 开始生成第 {index + 1}/10 篇文章: [{topic}]")
+    print(f"==========================================")
     
-    os.makedirs('articles', exist_ok=True)
+    # 动态将主题注入到 Prompt 中
+    prompt = f"""
+    You are an expert tech blogger and SEO specialist. 
+    Write a comprehensive, highly engaging tech blog post (at least 400 words) strictly about: "{topic}".
+    Output ONLY a valid JSON object with the following structure:
+    {{
+      "title": "A catchy, SEO-friendly title",
+      "category": "One word: TOOLS, STRATEGY, or MONEY",
+      "description": "Two sentences explaining the value of the guide.",
+      "read_time": "e.g., 7 min",
+      "content": "The full article body formatted in valid HTML. Use <h2> for subheadings, <p> for paragraphs, and <ul> for lists. Do NOT include <html> or <body> tags, just the inner content. Make it highly readable."
+    }}
+    """
     
-    article_page_html = f"""<!DOCTYPE html>
+    data = None
+    # 针对每一篇文章的网络重试机制
+    for attempt in range(MAX_RETRIES):
+        try:
+            response = client.chat.completions.create(
+                model="moonshot-v1-8k",
+                messages=[
+                    {"role": "system", "content": "You are a helpful assistant that outputs ONLY valid JSON."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.8,
+                timeout=60.0  # 单篇文章请求超时设为60秒
+            )
+            
+            raw_content = response.choices[0].message.content
+            cleaned_content = clean_json_response(raw_content)
+            data = json.loads(cleaned_content)
+            print(f"✅ 成功生成: {data['title']}")
+            break  
+            
+        except Exception as e:
+            print(f"⚠️ 第 {attempt + 1} 次请求失败: {e}")
+            if attempt == MAX_RETRIES - 1:
+                print(f"❌ 放弃生成第 {index + 1} 篇文章，跳过继续下一篇...")
+            time.sleep(5) 
+            
+    # 如果这篇文章成功拿到了数据，开始生成文件和卡片
+    if data:
+        date_str = datetime.now().strftime('%b %d')
+        random_image = random.choice(image_pool)
+
+        # 1. 生成独立的 HTML 文章页面
+        safe_title = "".join([c if c.isalnum() else "-" for c in data['title'].lower()])
+        safe_title = re.sub(r'-+', '-', safe_title).strip('-')
+        file_name = f"{safe_title}.html"
+        
+        os.makedirs('articles', exist_ok=True)
+        
+        article_page_html = f"""<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -152,14 +176,13 @@ if data:
 </body>
 </html>"""
 
-    with open(f"articles/{file_name}", "w", encoding='utf-8') as f:
-        f.write(article_page_html)
-    print(f"📄 独立文章页面已生成: articles/{file_name}")
+        with open(f"articles/{file_name}", "w", encoding='utf-8') as f:
+            f.write(article_page_html)
+        print(f"📄 独立文章页面已保存: articles/{file_name}")
 
-
-    # 2. 深度定制 HTML，1:1 复刻你最新的 <a href...> 优美卡片结构
-    new_article_html = f"""
-                    <!-- AI Generated Article: {datetime.now().strftime('%Y-%m-%d')} -->
+        # 2. 构建这篇新文章的主页卡片代码，并拼接到总代码中
+        new_article_html = f"""
+                    <!-- AI Generated Article: {datetime.now().strftime('%Y-%m-%d %H:%M')} -->
                     <a href="articles/{file_name}" class="block bg-slate-900/50 hover:bg-slate-800/80 p-5 rounded-2xl border border-slate-800 hover:border-primary/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:-translate-y-1">
                         <article class="flex flex-col sm:flex-row gap-6">
                             <div class="w-full sm:w-56 h-40 rounded-xl bg-slate-800 flex-shrink-0 relative overflow-hidden shadow-lg">
@@ -180,17 +203,30 @@ if data:
                             </div>
                         </article>
                     </a>"""
+        
+        all_cards_html += new_article_html + "\n"
+        
+        # 为了不触发 API 的频率限制 (Rate Limit)，每写完一篇休息 10 秒钟
+        print("⏳ 休息 10 秒以防止触发 API 频率限制...\n")
+        time.sleep(10)
 
+# ==========================================
+# 最后一步：一次性将所有成功的文章写入 index.html
+# ==========================================
+if all_cards_html:
     with open('index.html', 'r', encoding='utf-8') as f:
         html_content = f.read()
 
     anchor = "<!-- AI_ARTICLE_ANCHOR -->"
     
     if anchor in html_content:
-        updated_html = html_content.replace(anchor, f"{anchor}\n{new_article_html}")
+        updated_html = html_content.replace(anchor, f"{anchor}\n{all_cards_html}")
         with open('index.html', 'w', encoding='utf-8') as f:
             f.write(updated_html)
-        print("🚀 完美！新文章已无缝注入网站主页。")
+        print("\n🎉 大功告成！所有生成的文章已批量无缝注入网站主页。")
     else:
-        print("❌ 错误：在 index.html 中找不到锚点 <!-- AI_ARTICLE_ANCHOR -->！")
+        print("\n❌ 错误：在 index.html 中找不到锚点 <!-- AI_ARTICLE_ANCHOR -->！")
         sys.exit(1)
+else:
+    print("\n⚠️ 10篇文章均未生成成功，请检查网络或 API 额度。")
+    sys.exit(1)
