@@ -12,7 +12,11 @@ import random
 # ==========================================
 
 api_key = os.environ.get("AI_API_KEY")
-api_base = os.environ.get("AI_API_BASE", "https://api.moonshot.cn/v1") 
+api_base = os.environ.get("AI_API_BASE")
+
+# 修复 GitHub Actions 传递空字符串的 Bug
+if not api_base or api_base.strip() == "":
+    api_base = "https://api.moonshot.cn/v1"
 
 if not api_key:
     print("❌ 致命错误：找不到 AI_API_KEY，请检查 GitHub Secrets 配置！")
