@@ -3,6 +3,7 @@ import json
 import re
 import sys
 import time
+import urllib.parse
 from openai import OpenAI
 from datetime import datetime
 import random
@@ -48,17 +49,6 @@ def clean_json_response(text):
     text = re.sub(r'```\s*', '', text)
     return text.strip()
 
-image_pool = [
-    "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1684369175836-e8f000305f24?q=80&w=600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1696258686454-60082b2c33e2?q=80&w=600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1655635643532-fa9ba2648cbe?q=80&w=600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=80&w=600&auto=format&fit=crop",
-    "https://images.unsplash.com/photo-1676299081847-824916de030a?q=80&w=600&auto=format&fit=crop"
-]
-
 MAX_RETRIES = 3
 # 用于存储10篇文章的主页卡片HTML
 all_cards_html = ""
@@ -69,17 +59,24 @@ for index, topic in enumerate(niche_topics):
     print(f"🚀 开始生成第 {index + 1}/10 篇文章: [{topic}]")
     print(f"==========================================")
     
-    # 动态将主题注入到 Prompt 中
+    # 动态将主题注入到 Prompt 中，增加强力去AI味指令和图片构思指令
     prompt = f"""
-    You are an expert tech blogger and SEO specialist. 
-    Write a comprehensive, highly engaging tech blog post (at least 400 words) strictly about: "{topic}".
+    You are a veteran tech blogger and software reviewer. Your writing style is highly conversational, opinionated, and engaging.
+    Write a comprehensive tech blog post (at least 400 words) strictly about: "{topic}".
+    
+    CRITICAL HUMAN-WRITING RULES:
+    1. NEVER use AI cliches like "In today's fast-paced digital world", "Unlock the power", "Revolutionize", "Game-changer", "Delve into", or "Landscape".
+    2. Use varied sentence lengths (burstiness). Write like a real human speaking directly to the reader, using "I" and "you".
+    3. Include specific examples, hypothetical numbers, or practical steps to make it grounded.
+    
     Output ONLY a valid JSON object with the following structure:
     {{
-      "title": "A catchy, SEO-friendly title",
+      "title": "A highly clickable, human-sounding title (avoid colons if possible)",
       "category": "One word: TOOLS, STRATEGY, or MONEY",
-      "description": "Two sentences explaining the value of the guide.",
-      "read_time": "e.g., 7 min",
-      "content": "The full article body formatted in valid HTML. Use <h2> for subheadings, <p> for paragraphs, and <ul> for lists. Do NOT include <html> or <body> tags, just the inner content. Make it highly readable."
+      "description": "Two sentences explaining the value of the guide, written in a punchy hook style.",
+      "read_time": "e.g., 5 min",
+      "image_prompt": "A highly detailed prompt for an AI image generator describing a realistic, high-tech cover photo for this article (e.g., 'A sleek futuristic glowing microchip on a dark modern wood desk, cinematic lighting, photorealistic')",
+      "content": "The full article body formatted in valid HTML. Use <h2> for subheadings, <p> for paragraphs, and <ul> for lists. Do NOT include <html> or <body> tags, just the inner content."
     }}
     """
     
@@ -112,7 +109,11 @@ for index, topic in enumerate(niche_topics):
     # 如果这篇文章成功拿到了数据，开始生成文件和卡片
     if data:
         date_str = datetime.now().strftime('%b %d')
-        random_image = random.choice(image_pool)
+        
+        # 使用 Pollinations.ai 免费生成独一无二的专属配图
+        image_desc = data.get('image_prompt', 'high tech futuristic abstract background')
+        encoded_image_prompt = urllib.parse.quote(image_desc)
+        random_image = f"https://image.pollinations.ai/prompt/{encoded_image_prompt}?width=800&height=500&nologo=true"
 
         # 1. 生成独立的 HTML 文章页面
         safe_title = "".join([c if c.isalnum() else "-" for c in data['title'].lower()])
