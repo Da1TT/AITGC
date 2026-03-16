@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechGuide China - Latest AI & Tech Guides</title>
-    <meta name="description" content="Practical guides and tutorials on AI tools, automation, and making money online. Updated daily with fresh content.">
+    <title>TechGuide China - Your Complete Guide to AI Tools & Making Money Online</title>
+    <meta name="description" content="Practical guides, tool reviews, and strategies for AI tools, automation, and making money online. Updated daily with fresh content. Complete AI tool directory included.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -26,12 +26,15 @@
         .gradient-hero {
             background: radial-gradient(ellipse at top, #1e293b 0%, #020617 70%);
         }
+        .tool-card:hover .tool-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
     </style>
 </head>
 <body class="bg-dark text-slate-300 min-h-screen flex flex-col">
     <!-- Navigation -->
     <nav class="border-b border-white/5 p-6 bg-dark/95 backdrop-blur-xl sticky top-0 z-50">
-        <div class="max-w-5xl mx-auto flex items-center justify-between">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
             <a href="/" class="flex items-center gap-3">
                 <div class="w-10 h-10 bg-gradient-to-br from-primary to-blue-600 rounded-xl flex items-center justify-center shadow-lg">
                     <i data-lucide="code-2" class="w-5 h-5 text-white"></i>
@@ -40,6 +43,7 @@
             </a>
             <div class="hidden md:flex items-center gap-8">
                 <a href="/" class="text-slate-300 hover:text-white transition-colors font-medium">Home</a>
+                <a href="#ai-tools-directory" class="text-slate-400 hover:text-white transition-colors">AI Tools Directory</a>
                 <a href="/about.html" class="text-slate-400 hover:text-white transition-colors">About</a>
             </div>
         </div>
@@ -49,14 +53,14 @@
     <header class="gradient-hero py-16 md:py-24 px-6">
         <div class="max-w-4xl mx-auto text-center">
             <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
-                Your Daily Guide to <span class="text-primary">AI & Tech</span>
+                Complete <span class="text-primary">AI Tools Directory</span><br>and Tech Guides
             </h1>
             <p class="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-10">
-                Practical tutorials, tool reviews, and strategies for building and growing with technology. Updated daily by AI.
+                Browse our curated directory of the best AI tools, read in-depth guides, and learn how to make money with AI. Updated daily.
             </p>
             <div class="flex flex-wrap justify-center gap-4">
-                <a href="#featured-tools" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-full transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30">
-                    Browse Top AI Tools
+                <a href="#ai-tools-directory" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-full transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30">
+                    Browse AI Tools Directory
                 </a>
                 <a href="#latest-articles" class="px-8 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-full border border-white/10 transition-all">
                     Latest Articles
@@ -65,67 +69,382 @@
         </div>
     </header>
 
-    <!-- Featured AI Tools Section -->
-    <section id="featured-tools" class="py-16 px-6">
-        <div class="max-w-5xl mx-auto">
+    <!-- Featured AI Tools Directory -->
+    <section id="ai-tools-directory" class="py-16 px-6">
+        <div class="max-w-6xl mx-auto">
             <div class="text-center mb-12">
-                <h2 class="text-3xl font-bold text-white mb-4">Popular AI Tool Categories</h2>
-                <p class="text-slate-400 text-lg">Quick access to the best AI tools categorized by use case</p>
+                <h2 class="text-3xl font-bold text-white mb-4">📋 Curated AI Tools Directory</h2>
+                <p class="text-slate-400 text-lg">Click any card to visit the official website</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Content Generation -->
-                <a href="#latest-articles" class="block bg-gradient-to-br from-blue-900/30 to-blue-900/10 border border-blue-500/20 hover:border-blue-500/50 p-8 rounded-2xl transition-all hover:transform hover:-translate-y-2 group">
-                    <div class="w-14 h-14 bg-blue-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="file-text" class="w-7 h-7 text-blue-400"></i>
+            <!-- Content Writing -->
+            <h3 class="text-2xl font-bold text-white mb-8 pl-4 border-l-4 border-blue-500">✍️ Content Writing & Copy</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <a href="https://chat.openai.com" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-blue-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="message-square" class="w-6 h-6 text-blue-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">ChatGPT</h4>
+                            <p class="text-sm text-slate-400">The original AI chatbot</p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Content Writing</h3>
-                    <p class="text-slate-400 text-sm">AI tools for writing blog posts, copy, and content faster without sacrificing quality.</p>
                 </a>
-
-                <!-- Image Generation -->
-                <a href="#latest-articles" class="block bg-gradient-to-br from-purple-900/30 to-purple-900/10 border border-purple-500/20 hover:border-purple-500/50 p-8 rounded-2xl transition-all hover:transform hover:-translate-y-2 group">
-                    <div class="w-14 h-14 bg-purple-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="image" class="w-7 h-7 text-purple-400"></i>
+                <a href="https://claude.ai" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-blue-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-indigo-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="brain" class="w-6 h-6 text-indigo-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Claude 3</h4>
+                            <p class="text-sm text-slate-400">Long context AI assistant</p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">AI Image Generation</h3>
-                    <p class="text-slate-400 text-sm">Create stunning art and images with text-to-image AI models like Midjourney and DALL-E.</p>
                 </a>
-
-                <!-- SEO Tools -->
-                <a href="#latest-articles" class="block bg-gradient-to-br from-emerald-900/30 to-emerald-900/10 border border-emerald-500/20 hover:border-emerald-500/50 p-8 rounded-2xl transition-all hover:transform hover:-translate-y-2 group">
-                    <div class="w-14 h-14 bg-emerald-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="trending-up" class="w-7 h-7 text-emerald-400"></i>
+                <a href="https://gemini.google.com" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-blue-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-green-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="sparkles" class="w-6 h-6 text-green-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Google Gemini</h4>
+                            <p class="text-sm text-slate-400">Google's latest AI model</p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">SEO Automation</h3>
-                    <p class="text-slate-400 text-sm">Speed up your SEO workflow with AI-powered keyword research and content optimization.</p>
                 </a>
-
-                <!-- Video Creation -->
-                <a href="#latest-articles" class="block bg-gradient-to-br from-pink-900/30 to-pink-900/10 border border-pink-500/20 hover:border-pink-500/50 p-8 rounded-2xl transition-all hover:transform hover:-translate-y-2 group">
-                    <div class="w-14 h-14 bg-pink-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="video" class="w-7 h-7 text-pink-400"></i>
+                <a href="https://www.anthropic.com" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-blue-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-violet-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="file-text" class="w-6 h-6 text-violet-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Jasper</h4>
+                            <p class="text-sm text-slate-400">Marketing copy AI</p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">AI Video Tools</h3>
-                    <p class="text-slate-400 text-sm">Automate YouTube Shorts and social media content with AI video generation tools.</p>
                 </a>
-
-                <!-- Make Money -->
-                <a href="#latest-articles" class="block bg-gradient-to-br from-amber-900/30 to-amber-900/10 border border-amber-500/20 hover:border-amber-500/50 p-8 rounded-2xl transition-all hover:transform hover:-translate-y-2 group">
-                    <div class="w-14 h-14 bg-amber-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="dollar-sign" class="w-7 h-7 text-amber-400"></i>
+                <a href="https://copy.ai" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-blue-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-cyan-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="copy" class="w-6 h-6 text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Copy.ai</h4>
+                            <p class="text-sm text-slate-400">AI copy generator</p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">AI Money Making</h3>
-                    <p class="text-slate-400 text-sm">Real strategies for making passive income with AI art, content, and automation.</p>
                 </a>
-
-                <!-- Productivity -->
-                <a href="#latest-articles" class="block bg-gradient-to-br from-sky-900/30 to-sky-900/10 border border-sky-500/20 hover:border-sky-500/50 p-8 rounded-2xl transition-all hover:transform hover:-translate-y-2 group">
-                    <div class="w-14 h-14 bg-sky-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                        <i data-lucide="zap" class="w-7 h-7 text-sky-400"></i>
+                <a href="https://www.notion.so/product/ai" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-blue-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-gray-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="notebook-text" class="w-6 h-6 text-gray-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Notion AI</h4>
+                            <p class="text-sm text-slate-400">AI in your notes</p>
+                        </div>
                     </div>
-                    <h3 class="text-xl font-bold text-white mb-3">Productivity Hacks</h3>
-                    <p class="text-slate-400 text-sm">AI shortcuts and workflows to get more done in less time as a digital entrepreneur.</p>
+                </a>
+            </div>
+
+            <!-- Image Generation -->
+            <h3 class="text-2xl font-bold text-white mb-8 pl-4 border-l-4 border-purple-500">🎨 Image Generation</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <a href="https://www.midjourney.com" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-purple-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="image" class="w-6 h-6 text-purple-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Midjourney</h4>
+                            <p class="text-sm text-slate-400">Best AI art generation</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.dall-e.com" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-purple-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-pink-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="palette" class="w-6 h-6 text-pink-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">DALL-E 3</h4>
+                            <p class="text-sm text-slate-400">OpenAI image model</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://stability.ai" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-purple-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="cloud" class="w-6 h-6 text-blue-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Stable Diffusion</h4>
+                            <p class="text-sm text-slate-400">Open source image model</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://leonardo.ai" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-purple-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-red-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="brush" class="w-6 h-6 text-red-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Leonardo.AI</h4>
+                            <p class="text-sm text-slate-400">AI game asset generation</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://bluewillow.ai" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-purple-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-green-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="tree" class="w-6 h-6 text-green-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">BlueWillow</h4>
+                            <p class="text-sm text-slate-400">Free alternative</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.bing.com/create" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-purple-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-cyan-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="bing" class="w-6 h-6 text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">DALL-E via Bing</h4>
+                            <p class="text-sm text-slate-400">Free DALL-E 3 access</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Video & Audio -->
+            <h3 class="text-2xl font-bold text-white mb-8 pl-4 border-l-4 border-pink-500">🎬 Video & Audio AI</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <a href="https://runwayml.com" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-pink-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-pink-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="video" class="w-6 h-6 text-pink-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Runway ML</h4>
+                            <p class="text-sm text-slate-400">AI video editing</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://pika.art" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-pink-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-red-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="play" class="w-6 h-6 text-red-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Pika Labs</h4>
+                            <p class="text-sm text-slate-400">Text to video</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://elevenlabs.io" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-pink-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-orange-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="mic" class="w-6 h-6 text-orange-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">ElevenLabs</h4>
+                            <p class="text-sm text-slate-400">AI voice cloning</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://openai.com/dall-e" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-pink-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-yellow-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="speaker" class="w-6 h-6 text-yellow-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">OpenAI TTS</h4>
+                            <p class="text-sm text-slate-400">Text to speech</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.descript.com" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-pink-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-indigo-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="scissors" class="w-6 h-6 text-indigo-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Descript</h4>
+                            <p class="text-sm text-slate-400">AI audio editing</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.suno.ai" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-pink-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="music" class="w-6 h-6 text-purple-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Suno AI</h4>
+                            <p class="text-sm text-slate-400">AI music generation</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- SEO & Marketing -->
+            <h3 class="text-2xl font-bold text-white mb-8 pl-4 border-l-4 border-emerald-500">📈 SEO & Marketing</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <a href="https://www.semrush.com" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-emerald-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-emerald-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="trending-up" class="w-6 h-6 text-emerald-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Semrush</h4>
+                            <p class="text-sm text-slate-400">All-in-one SEO tool</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://ahrefs.com" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-emerald-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="search" class="w-6 h-6 text-blue-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Ahrefs</h4>
+                            <p class="text-sm text-slate-400">Backlink analysis</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://neilpatel.com/ubersuggest/" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-emerald-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-green-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="hash" class="w-6 h-6 text-green-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Ubersuggest</h4>
+                            <p class="text-sm text-slate-400">Free keyword research</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.grammarly.com" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-emerald-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-red-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="check-circle" class="w-6 h-6 text-red-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Grammarly</h4>
+                            <p class="text-sm text-slate-400">AI writing assistant</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://buffer.com" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-emerald-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-cyan-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="share-2" class="w-6 h-6 text-cyan-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Buffer</h4>
+                            <p class="text-sm text-slate-400">Social media scheduling</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.canva.com" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-emerald-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-blue-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="layout" class="w-6 h-6 text-blue-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Canva</h4>
+                            <p class="text-sm text-slate-400">Design made easy</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Development & No-Code -->
+            <h3 class="text-2xl font-bold text-white mb-8 pl-4 border-l-4 border-sky-500">💻 Development & No-Code</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <a href="https://bubble.io" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-sky-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-sky-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="box" class="w-6 h-6 text-sky-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Bubble</h4>
+                            <p class="text-sm text-slate-400">No-code app building</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://webflow.com" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-sky-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-indigo-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="globe" class="w-6 h-6 text-indigo-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Webflow</h4>
+                            <p class="text-sm text-slate-400">No-code web design</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.framer.ai" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-sky-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-amber-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="cpu" class="w-6 h-6 text-amber-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Framer AI</h4>
+                            <p class="text-sm text-slate-400">AI website generator</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.adalo.com" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-sky-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="smartphone" class="w-6 h-6 text-purple-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Adalo</h4>
+                            <p class="text-sm text-slate-400">No-code mobile apps</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Making Money with AI -->
+            <h3 class="text-2xl font-bold text-white mb-8 pl-4 border-l-4 border-amber-500">💰 AI & Business</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+                <a href="https://www.aihub.com" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-amber-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-amber-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="dollar-sign" class="w-6 h-6 text-amber-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">AI Automation Agency</h4>
+                            <p class="text-sm text-slate-400">Sell AI services to clients</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.flowjet.ai" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-amber-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-green-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="briefcase" class="w-6 h-6 text-green-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Digital Products</h4>
+                            <p class="text-sm text-slate-400">Sell AI-generated products</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="https://www.patreon.com" target="_blank" rel="noopener noreferrer" class="tool-card block bg-gradient-to-br from-slate-800/50 to-slate-900/50 hover:from-slate-800 hover:to-slate-900 border border-slate-700 hover:border-amber-500/50 p-6 rounded-xl transition-all hover:-translate-y-1">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-red-600/20 rounded-lg flex items-center justify-center tool-icon transition-transform duration-300">
+                            <i data-lucide="users" class="w-6 h-6 text-red-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-bold text-white">Membership</h4>
+                            <p class="text-sm text-slate-400">Recurring revenue</p>
+                        </div>
+                    </div>
                 </a>
             </div>
         </div>
@@ -133,7 +452,7 @@
 
     <!-- Latest Articles -->
     <main id="latest-articles" class="flex-grow py-12 px-6 bg-slate-950/50">
-        <div class="max-w-5xl mx-auto">
+        <div class="max-w-6xl mx-auto">
             <div class="flex items-center justify-between mb-10">
                 <h2 class="text-3xl font-bold text-white">Latest Articles</h2>
                 <span class="text-sm text-slate-400 font-medium flex items-center gap-2">
@@ -150,7 +469,7 @@
 
     <!-- Footer -->
     <footer class="border-t border-white/5 py-12 px-6 bg-[#010409]">
-        <div class="max-w-5xl mx-auto">
+        <div class="max-w-6xl mx-auto">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                     <div class="flex items-center gap-2 mb-2">
@@ -158,10 +477,12 @@
                         <span class="font-bold text-white text-lg">TechGuide China</span>
                     </div>
                     <p class="text-slate-500 text-sm">
-                        Automated tech content for the modern developer. Updated daily with AI.
+                        Your complete directory of AI tools and practical guides for digital entrepreneurs.
                     </p>
                 </div>
                 <div class="flex items-center gap-6">
+                    <a href="/" class="text-slate-400 hover:text-white transition-colors text-sm">Home</a>
+                    <a href="#ai-tools-directory" class="text-slate-400 hover:text-white transition-colors text-sm">AI Tools Directory</a>
                     <a href="/about.html" class="text-slate-400 hover:text-white transition-colors text-sm">About</a>
                     <a href="/privacy.html" class="text-slate-400 hover:text-white transition-colors text-sm">Privacy</a>
                     <a href="/terms.html" class="text-slate-400 hover:text-white transition-colors text-sm">Terms</a>
