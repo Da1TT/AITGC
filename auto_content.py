@@ -145,12 +145,13 @@ Output ONLY a valid JSON object with NO extra text before or after. Use this exa
     if data:
         date_str = datetime.now().strftime('%b %d')
 
-        # Use Unsplash for stable image hosting - correct API format
+        # Use Picsum Photos for stable image hosting - reliable CDN that works globally
         # Fallback to a solid colored background if no image
         image_keywords = data.get('image_keywords', topic.split(',')[0])
-        encoded_keywords = urllib.parse.quote(image_keywords)
-        # Correct Unsplash random URL: source.unsplash.com/random/WxH?keywords
-        random_image = f"https://source.unsplash.com/random/800x500?{encoded_keywords}"
+        # Get random image from Picsum based on seed = hash(image_keywords)
+        seed = sum(ord(c) for c in image_keywords) % 1000
+        random_image = f"https://picsum.photos/seed/{seed}/800/500"
+
 
         # If still fails, CSS gradient background will show
         safe_title = "".join([c if c.isalnum() or c in '-_' else "-" for c in data['title'].lower()])
