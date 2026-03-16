@@ -145,12 +145,12 @@ Output ONLY a valid JSON object with NO extra text before or after. Use this exa
     if data:
         date_str = datetime.now().strftime('%b %d')
 
-        # Use Unsplash for stable image hosting
+        # Use Unsplash for stable image hosting - correct API format
         # Fallback to a solid colored background if no image
         image_keywords = data.get('image_keywords', topic.split(',')[0])
         encoded_keywords = urllib.parse.quote(image_keywords)
-        # Use Unsplash source for random relevant image - much more reliable
-        random_image = f"https://source.unsplash.com/800x500/?{encoded_keywords}"
+        # Correct Unsplash random URL: source.unsplash.com/random/WxH?keywords
+        random_image = f"https://source.unsplash.com/random/800x500?{encoded_keywords}"
 
         # If still fails, CSS gradient background will show
         safe_title = "".join([c if c.isalnum() or c in '-_' else "-" for c in data['title'].lower()])
@@ -221,20 +221,20 @@ Output ONLY a valid JSON object with NO extra text before or after. Use this exa
 
         new_article_html = f"""
 <!-- AI Generated Article: {datetime.now().strftime('%Y-%m-%d %H:%M')} -->
-<a href="articles/{file_name}" class="block bg-slate-900/50 hover:bg-slate-800/80 p-5 rounded-2xl border border-slate-800 hover:border-primary/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:-translate-y-1">
+<a href="articles/{file_name}" class="article-card block bg-slate-900/50 hover:bg-slate-800/80 p-6 rounded-2xl border border-slate-800 hover:border-primary/50 transition-all duration-300 group shadow-xl shadow-black/25 hover:-translate-y-2">
     <article class="flex flex-col sm:flex-row gap-6">
-        <div class="w-full sm:w-56 h-40 rounded-xl bg-slate-800 flex-shrink-0 relative overflow-hidden shadow-lg article-image-fallback">
+        <div class="w-full sm:w-56 h-40 rounded-xl bg-slate-800 flex-shrink-0 relative overflow-hidden shadow-xl article-image-fallback">
             <img src="{random_image}" alt="{data['title']}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" onerror="this.style.display='none'">
             <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent"></div>
         </div>
         <div class="flex flex-col justify-center flex-grow py-1">
-            <div class="flex items-center gap-2 mb-2">
+            <div class="flex items-center gap-2 mb-3">
                 <span class="text-[10px] font-bold text-primary px-2 py-0.5 bg-primary/10 rounded-md uppercase">{data['category']}</span>
                 <span class="text-[10px] text-emerald-400 font-medium flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>NEW</span>
             </div>
             <h3 class="text-xl font-bold text-slate-100 group-hover:text-primary transition-colors leading-tight">{data['title']}</h3>
-            <p class="text-sm text-slate-400 mt-2 line-clamp-2">{data['description']}</p>
-            <div class="mt-4 text-[11px] text-slate-500 font-medium tracking-wide flex items-center gap-4">
+            <p class="text-sm text-slate-400 mt-3 line-clamp-2">{data['description']}</p>
+            <div class="mt-5 text-[11px] text-slate-500 font-medium tracking-wide flex items-center gap-4">
                 <span class="flex items-center gap-1"><i data-lucide="calendar" class="w-3.5 h-3.5"></i> {date_str}</span>
                 <span class="flex items-center gap-1"><i data-lucide="clock" class="w-3.5 h-3.5"></i> {data['read_time']} READ</span>
             </div>

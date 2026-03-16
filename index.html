@@ -29,6 +29,16 @@
         .tool-card:hover .tool-icon {
             transform: scale(1.1) rotate(5deg);
         }
+        .tool-card {
+            backdrop-filter: blur(8px);
+        }
+        .article-card {
+            backdrop-filter: blur(8px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .article-card:hover {
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body class="bg-dark text-slate-300 min-h-screen flex flex-col">
