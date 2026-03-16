@@ -153,7 +153,7 @@ Output ONLY a valid JSON object with NO extra text before or after. Use this exa
         random_image = f"https://source.unsplash.com/800x500/?{encoded_keywords}"
 
         # If still fails, CSS gradient background will show
-        safe_title = "".join([c if c.isalnum() or c in '-_' ] else "-" for c in data['title'].lower()])
+        safe_title = "".join([c if c.isalnum() or c in '-_' else "-" for c in data['title'].lower()])
         safe_title = re.sub(r'-+', '-', safe_title).strip('-')
         file_name = f"{safe_title}.html"
 
