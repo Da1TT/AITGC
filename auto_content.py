@@ -8,8 +8,12 @@ from openai import OpenAI
 from datetime import datetime
 
 # ==========================================
-# TechGuide - Ultimate Automation Engine
-# Generating 10 articles, Anti-AI Cliches, Dynamic Unique Images
+# TechGuide - Ultimate Automation Engine v2
+# Improvements:
+# - More human-like writing, minimal AI traces
+# - Stable image hosting (Unsplash + fallback)
+# - Longer, more comprehensive articles
+# - Better structure for SEO
 # ==========================================
 
 api_key = os.environ.get("AI_API_KEY")
@@ -30,6 +34,7 @@ client = OpenAI(
     base_url=api_base
 )
 
+# Expanded topic list for continuous generation
 niche_topics = [
     "AI tools for SEO automation and rapid Google ranking",
     "Monetizing AI art and Midjourney for passive income",
@@ -40,7 +45,27 @@ niche_topics = [
     "AI voice cloning tools and audio monetization strategies",
     "Top AI productivity hacks for digital entrepreneurs",
     "Using AI models like Claude 3 for data analysis and finance",
-    "How to start and scale an AI Automation Agency (AIAA)"
+    "How to start and scale an AI Automation Agency (AIAA)",
+    "Best free AI image generators compared in 2024",
+    "How to use AI to write blog posts faster without losing quality",
+    "Building an email list with AI content automation",
+    "AI keyword research tools that actually save time",
+    "How to create and sell AI prompts online for profit",
+    "Top AI Chrome extensions every developer should use",
+    "Using AI for competitive analysis in digital marketing",
+    "How to price AI automation services for clients",
+    "AI content detection tools and how they work",
+    "Passive income with AI: real examples that work today",
+    "SEO mistakes AI tools can automatically fix for you",
+    "How to train custom AI models for your business",
+    "AI web design tools that generate complete websites",
+    "Using AI to find low-competition keywords for blogs",
+    "How to start a AI newsletter and monetize it",
+    "Best AI tools for content rewriting and paraphrasing",
+    "Legal issues to consider when using AI for content",
+    "How to outsource content creation with AI effectively",
+    "AI vs human writers: when to use which in 2024",
+    "Case study: how I grew a blog to 10k visits with AI content"
 ]
 
 def clean_json_response(text):
@@ -51,26 +76,44 @@ def clean_json_response(text):
 MAX_RETRIES = 3
 all_cards_html = ""
 
-for index, topic in enumerate(niche_topics):
+for index, topic in enumerate(niche_topics[:10]):  # Still generate 10 per run
     print(f"\n🚀 Generating Article {index + 1}/10: [{topic}]")
 
     prompt = f"""
-You are a veteran tech blogger and software reviewer. Your writing style is highly conversational, opinionated, and engaging.
-Write a comprehensive tech blog post (at least 450 words) strictly about: "{topic}".
+You are a veteran tech blogger with 10+ years of experience. Write a comprehensive, in-depth blog post STRICTLY about: "{topic}".
 
-CRITICAL HUMAN-WRITING RULES:
-1. NEVER use AI cliches like "In today's fast-paced digital world", "Unlock the power", "Revolutionize", "Game-changer", "Delve into", or "Landscape".
-2. Use varied sentence lengths (burstiness). Write like a real human speaking directly to the reader, using "I" and "you".
-3. Include specific examples, hypothetical numbers, or practical steps to make it grounded.
+=== WRITING RULES - FOLLOW THESE EXACTLY TO AVOID AI DETECTION ===
+1. WORD COUNT: Minimum 800 words, target 1000-1200 words. Longer = better for SEO.
+2. TONE: Conversational, personal, opinionated. Use "I" and "you" frequently. Share personal experiences and anecdotes.
+3. VARIETY: Mix short sentences (3-5 words) with long ones. Vary paragraph length (1-5 sentences). This creates "burstiness" that avoids AI detection.
+4. FORBIDDEN AI CLICHES: Never use any of these:
+   - "In today's fast-paced digital world"
+   - "Unlock the power of"
+   - "Revolutionize your"
+   - "Game-changer"
+   - "Delve into"
+   - "Landscape"
+   - "In this article"
+   - "Stay tuned"
+   - "Without further ado"
+   - "Hope you enjoy"
+5. STRUCTURE:
+   - Start with a hook: share a quick personal observation or story
+   - Break into at least 4-6 subheadings with <h2> tags
+   - Include at least one bullet-point list
+   - End with a conclusion that gives a clear takeaway or recommendation
+   - Add specific examples, tool names, and approximate numbers
+6. ORIGINALITY: Write unique content that hasn't been written the same way a thousand times before. Add your unique "voice".
 
-Output ONLY a valid JSON object with the following structure:
+=== OUTPUT FORMAT ===
+Output ONLY a valid JSON object with NO extra text before or after. Use this exact structure:
 {{
-  "title": "A highly clickable, human-sounding title (avoid colons if possible)",
+  "title": "A highly clickable, human-sounding title (6-10 words, avoid colons if possible)",
   "category": "One word: TOOLS, STRATEGY, or MONEY",
-  "description": "Two sentences explaining the value of the guide, written in a punchy hook style.",
-  "read_time": "e.g., 5 min",
-  "image_prompt": "A highly detailed prompt for an AI image generator describing a realistic, high-tech cover photo for this article (e.g., 'A sleek futuristic glowing microchip on a dark modern wood desk, cinematic lighting, photorealistic')",
-  "content": "The full article body formatted in valid HTML. Use <h2> for subheadings, <p> for paragraphs, and <ul> for lists. Do NOT include <html> or <body> tags, just the inner content."
+  "description": "Two punchy sentences that hook readers to click, explain the value clearly",
+  "read_time": "estimated read time in minutes, e.g., 8 min",
+  "image_keywords": "1-3 keywords for this article topic, separated by commas (for unsplash image search)",
+  "content": "The full article body in valid HTML. Use <h2> for main subheadings, <h3> if needed, <p> for paragraphs, <ul>/<li> for lists. Do NOT include <html> or <body> tags."
 }}
 """
 
@@ -80,11 +123,11 @@ Output ONLY a valid JSON object with the following structure:
             response = client.chat.completions.create(
                 model="moonshot-v1-8k",
                 messages=[
-                    {"role": "system", "content": "You are a helpful assistant that outputs ONLY valid JSON."},
+                    {"role": "system", "content": "You are an experienced tech blogger writing for humans. Output ONLY valid JSON with no extra text."},
                     {"role": "user", "content": prompt}
                 ],
-                temperature=0.8,
-                timeout=60.0
+                temperature=0.9,
+                timeout=120.0
             )
 
             raw_content = response.choices[0].message.content
@@ -102,12 +145,15 @@ Output ONLY a valid JSON object with the following structure:
     if data:
         date_str = datetime.now().strftime('%b %d')
 
-        # Real-time unique image generation
-        image_desc = data.get('image_prompt', 'high tech futuristic abstract background')
-        encoded_image_prompt = urllib.parse.quote(image_desc)
-        random_image = f"https://image.pollinations.ai/prompt/{encoded_image_prompt}?width=800&height=500&nologo=true"
+        # Use Unsplash for stable image hosting
+        # Fallback to a solid colored background if no image
+        image_keywords = data.get('image_keywords', topic.split(',')[0])
+        encoded_keywords = urllib.parse.quote(image_keywords)
+        # Use Unsplash source for random relevant image - much more reliable
+        random_image = f"https://source.unsplash.com/800x500/?{encoded_keywords}"
 
-        safe_title = "".join([c if c.isalnum() else "-" for c in data['title'].lower()])
+        # If still fails, CSS gradient background will show
+        safe_title = "".join([c if c.isalnum() or c in '-_' ] else "-" for c in data['title'].lower()])
         safe_title = re.sub(r'-+', '-', safe_title).strip('-')
         file_name = f"{safe_title}.html"
 
@@ -118,21 +164,23 @@ Output ONLY a valid JSON object with the following structure:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{data['title']} - TechGuide</title>
+    <title>{data['title']} - TechGuide China</title>
+    <meta name="description" content="{data['description']}">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
         tailwind.config = {{ theme: {{ extend: {{ colors: {{ dark: '#020617', primary: '#3b82f6' }} }} }} }}
     </script>
     <style>
-        body {{ font-family: 'Inter', system-ui, sans-serif; }}
+        body {{ font-family: 'Inter', system-ui, -apple-system, sans-serif; }}
         .article-body h2 {{ font-size: 1.8rem; font-weight: 800; color: #f8fafc; margin-top: 2.5rem; margin-bottom: 1rem; }}
         .article-body h3 {{ font-size: 1.4rem; font-weight: 700; color: #f1f5f9; margin-top: 2rem; margin-bottom: 0.8rem; }}
         .article-body p {{ margin-bottom: 1.5rem; font-size: 1.125rem; line-height: 1.8; color: #94a3b8; }}
         .article-body ul {{ list-style-type: disc; padding-left: 1.5rem; margin-bottom: 1.5rem; color: #94a3b8; }}
-        .article-body li {{ margin-bottom: 0.5rem; }}
+        .article-body li {{ margin-bottom: 0.75rem; line-height: 1.7; }}
         .article-body strong {{ color: #e2e8f0; }}
         .article-body a {{ color: #60a5fa; text-decoration: none; border-bottom: 1px solid #3b82f6; }}
+        .article-image-fallback {{ background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); }}
     </style>
 </head>
 <body class="bg-dark text-slate-300 min-h-screen flex flex-col">
@@ -153,8 +201,8 @@ Output ONLY a valid JSON object with the following structure:
             </div>
         </div>
 
-        <div class="mb-12 rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border border-white/5">
-            <img src="{random_image}" alt="Article Cover" class="w-full h-auto object-cover opacity-90">
+        <div class="mb-12 rounded-2xl overflow-hidden shadow-2xl shadow-black/50 border border-white/5 article-image-fallback">
+            <img src="{random_image}" alt="{data['title']}" class="w-full h-auto object-cover opacity-90" onerror="this.style.display='none'">
         </div>
 
         <article class="article-body">
@@ -162,7 +210,7 @@ Output ONLY a valid JSON object with the following structure:
         </article>
     </main>
     <footer class="border-t border-white/5 py-8 text-center text-slate-600 text-sm bg-[#010409]">
-        © 2024 TechGuide Global. All rights reserved.
+        © 2024 TechGuide China. All rights reserved.
     </footer>
     <script>lucide.createIcons();</script>
 </body>
@@ -175,8 +223,8 @@ Output ONLY a valid JSON object with the following structure:
 <!-- AI Generated Article: {datetime.now().strftime('%Y-%m-%d %H:%M')} -->
 <a href="articles/{file_name}" class="block bg-slate-900/50 hover:bg-slate-800/80 p-5 rounded-2xl border border-slate-800 hover:border-primary/50 transition-all duration-300 group shadow-lg shadow-black/20 hover:-translate-y-1">
     <article class="flex flex-col sm:flex-row gap-6">
-        <div class="w-full sm:w-56 h-40 rounded-xl bg-slate-800 flex-shrink-0 relative overflow-hidden shadow-lg">
-            <img src="{random_image}" alt="{data['title']}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out">
+        <div class="w-full sm:w-56 h-40 rounded-xl bg-slate-800 flex-shrink-0 relative overflow-hidden shadow-lg article-image-fallback">
+            <img src="{random_image}" alt="{data['title']}" loading="lazy" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out" onerror="this.style.display='none'">
             <div class="absolute inset-0 bg-gradient-to-t from-dark/80 via-transparent to-transparent"></div>
         </div>
         <div class="flex flex-col justify-center flex-grow py-1">
@@ -195,8 +243,8 @@ Output ONLY a valid JSON object with the following structure:
 </a>"""
 
         all_cards_html += new_article_html + "\n"
-        print("⏳ Sleeping 8 seconds to prevent API Rate Limits...\n")
-        time.sleep(8)
+        print("⏳ Sleeping 10 seconds to prevent API Rate Limits...\n")
+        time.sleep(10)
 
 if all_cards_html:
     with open('index.html', 'r', encoding='utf-8') as f:

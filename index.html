@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TechGuide China - Latest AI & Tech Guides</title>
-    <meta name="description" content="Handcrafted guides and tutorials on AI tools, automation, and making money online. Updated daily with fresh content.">
+    <meta name="description" content="Practical guides and tutorials on AI tools, automation, and making money online. Updated daily with fresh content.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -51,14 +51,88 @@
             <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
                 Your Daily Guide to <span class="text-primary">AI & Tech</span>
             </h1>
-            <p class="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            <p class="text-xl text-slate-400 max-w-2xl mx-auto leading-relaxed mb-10">
                 Practical tutorials, tool reviews, and strategies for building and growing with technology. Updated daily by AI.
             </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#featured-tools" class="px-8 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-full transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30">
+                    Browse Top AI Tools
+                </a>
+                <a href="#latest-articles" class="px-8 py-3 bg-white/10 hover:bg-white/20 text-white font-semibold rounded-full border border-white/10 transition-all">
+                    Latest Articles
+                </a>
+            </div>
         </div>
     </header>
 
-    <!-- Article List -->
-    <main class="flex-grow py-12 px-6">
+    <!-- Featured AI Tools Section -->
+    <section id="featured-tools" class="py-16 px-6">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-white mb-4">Popular AI Tool Categories</h2>
+                <p class="text-slate-400 text-lg">Quick access to the best AI tools categorized by use case</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Content Generation -->
+                <a href="#latest-articles" class="block bg-gradient-to-br from-blue-900/30 to-blue-900/10 border border-blue-500/20 hover:border-blue-500/50 p-8 rounded-2xl transition-all hover:transform hover:-translate-y-2 group">
+                    <div class="w-14 h-14 bg-blue-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="file-text" class="w-7 h-7 text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Content Writing</h3>
+                    <p class="text-slate-400 text-sm">AI tools for writing blog posts, copy, and content faster without sacrificing quality.</p>
+                </a>
+
+                <!-- Image Generation -->
+                <a href="#latest-articles" class="block bg-gradient-to-br from-purple-900/30 to-purple-900/10 border border-purple-500/20 hover:border-purple-500/50 p-8 rounded-2xl transition-all hover:transform hover:-translate-y-2 group">
+                    <div class="w-14 h-14 bg-purple-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="image" class="w-7 h-7 text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">AI Image Generation</h3>
+                    <p class="text-slate-400 text-sm">Create stunning art and images with text-to-image AI models like Midjourney and DALL-E.</p>
+                </a>
+
+                <!-- SEO Tools -->
+                <a href="#latest-articles" class="block bg-gradient-to-br from-emerald-900/30 to-emerald-900/10 border border-emerald-500/20 hover:border-emerald-500/50 p-8 rounded-2xl transition-all hover:transform hover:-translate-y-2 group">
+                    <div class="w-14 h-14 bg-emerald-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="trending-up" class="w-7 h-7 text-emerald-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">SEO Automation</h3>
+                    <p class="text-slate-400 text-sm">Speed up your SEO workflow with AI-powered keyword research and content optimization.</p>
+                </a>
+
+                <!-- Video Creation -->
+                <a href="#latest-articles" class="block bg-gradient-to-br from-pink-900/30 to-pink-900/10 border border-pink-500/20 hover:border-pink-500/50 p-8 rounded-2xl transition-all hover:transform hover:-translate-y-2 group">
+                    <div class="w-14 h-14 bg-pink-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="video" class="w-7 h-7 text-pink-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">AI Video Tools</h3>
+                    <p class="text-slate-400 text-sm">Automate YouTube Shorts and social media content with AI video generation tools.</p>
+                </a>
+
+                <!-- Make Money -->
+                <a href="#latest-articles" class="block bg-gradient-to-br from-amber-900/30 to-amber-900/10 border border-amber-500/20 hover:border-amber-500/50 p-8 rounded-2xl transition-all hover:transform hover:-translate-y-2 group">
+                    <div class="w-14 h-14 bg-amber-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="dollar-sign" class="w-7 h-7 text-amber-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">AI Money Making</h3>
+                    <p class="text-slate-400 text-sm">Real strategies for making passive income with AI art, content, and automation.</p>
+                </a>
+
+                <!-- Productivity -->
+                <a href="#latest-articles" class="block bg-gradient-to-br from-sky-900/30 to-sky-900/10 border border-sky-500/20 hover:border-sky-500/50 p-8 rounded-2xl transition-all hover:transform hover:-translate-y-2 group">
+                    <div class="w-14 h-14 bg-sky-600/20 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="zap" class="w-7 h-7 text-sky-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Productivity Hacks</h3>
+                    <p class="text-slate-400 text-sm">AI shortcuts and workflows to get more done in less time as a digital entrepreneur.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest Articles -->
+    <main id="latest-articles" class="flex-grow py-12 px-6 bg-slate-950/50">
         <div class="max-w-5xl mx-auto">
             <div class="flex items-center justify-between mb-10">
                 <h2 class="text-3xl font-bold text-white">Latest Articles</h2>
@@ -84,7 +158,7 @@
                         <span class="font-bold text-white text-lg">TechGuide China</span>
                     </div>
                     <p class="text-slate-500 text-sm">
-                        Automated tech content for the modern developer.
+                        Automated tech content for the modern developer. Updated daily with AI.
                     </p>
                 </div>
                 <div class="flex items-center gap-6">
@@ -94,7 +168,7 @@
                 </div>
             </div>
             <div class="mt-8 pt-8 border-t border-white/5 text-center text-slate-600 text-sm">
-                © 2024 TechGuide Global. All rights reserved.
+                © 2024 TechGuide China. All rights reserved.
             </div>
         </div>
     </footer>
