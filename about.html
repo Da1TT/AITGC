@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - TechGuide China</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#020617',
+                        primary: '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+    </style>
+</head>
+<body class="bg-[#020617] text-slate-300 min-h-screen flex flex-col">
+    <nav class="border-b border-white/5 p-6 bg-dark/95 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex items-center">
+            <a href="index.html" class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 font-medium">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-6 py-12 w-full flex-grow">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-8">About TechGuide</h1>
+
+        <div class="prose prose-invert prose-lg max-w-none">
+            <p class="text-lg leading-relaxed text-slate-300 mb-6">
+                TechGuide is your daily source for practical, actionable guides about artificial intelligence, automation, and digital entrepreneurship.
+            </p>
+
+            <p class="text-lg leading-relaxed text-slate-300 mb-6">
+                Our mission is simple: to help you navigate the fast-changing world of technology and turn it into real opportunities. Whether you're a developer looking for new tools, an entrepreneur building an online business, or just curious about what AI can do for you, you'll find something valuable here.
+            </p>
+
+            <h2 class="text-2xl font-bold text-white mt-12 mb-4">What You'll Find Here</h2>
+
+            <ul class="list-disc pl-6 space-y-2 text-slate-300">
+                <li>Deep dives into the latest AI tools and how to use them</li>
+                <li>Proven strategies for making money online</li>
+                <li>Step-by-step tutorials for beginners and experts alike</li>
+                <li>Insights on industry trends before they go mainstream</li>
+            </ul>
+
+            <p class="text-lg leading-relaxed text-slate-300 mt-6">
+                We publish new content daily, so check back often for the latest guides!
+            </p>
+        </div>
+    </main>
+
+    <footer class="border-t border-white/5 py-8 text-center text-slate-600 text-sm bg-[#010409]">
+        © 2024 TechGuide Global. All rights reserved.
+    </footer>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>

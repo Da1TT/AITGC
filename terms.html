@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - TechGuide China</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#020617',
+                        primary: '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', system-ui, sans-serif; }
+    </style>
+</head>
+<body class="bg-[#020617] text-slate-300 min-h-screen flex flex-col">
+    <nav class="border-b border-white/5 p-6 bg-dark/95 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex items-center">
+            <a href="index.html" class="text-slate-400 hover:text-white transition-colors flex items-center gap-2 font-medium">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to Home
+            </a>
+        </div>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-6 py-12 w-full flex-grow">
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-8">Terms of Service</h1>
+
+        <div class="space-y-6 text-slate-300">
+            <p>
+                By accessing and using the TechGuide website (https://techguidechina.com), you agree to be bound by these terms of service. If you do not agree to these terms, please do not use this website.
+            </p>
+
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">Use of Content</h2>
+            <p>
+                All content provided on this website is for informational purposes only. We make every effort to keep the information accurate and up to date, but we do not guarantee the accuracy, completeness, or usefulness of any information on this website.
+            </p>
+
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">External Links</h2>
+            <p>
+                This website may contain links to external websites that are not provided or maintained by us. We do not guarantee the accuracy, relevance, timeliness, or completeness of any information on these external websites.
+            </p>
+
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">Affiliate Disclosure</h2>
+            <p>
+                Some links on this website may be affiliate links, meaning we may earn a commission if you click on the link and make a purchase. This does not affect the price you pay.
+            </p>
+
+            <h2 class="text-2xl font-bold text-white mt-8 mb-4">Changes to Terms</h2>
+            <p>
+                We reserve the right to update or change these terms of service at any time. Your continued use of the website after any changes constitutes acceptance of the new terms.
+            </p>
+
+            <p class="mt-8 text-sm text-slate-400">
+                Last updated: March 16, 2026
+            </p>
+        </div>
+    </main>
+
+    <footer class="border-t border-white/5 py-8 text-center text-slate-600 text-sm bg-[#010409]">
+        © 2024 TechGuide Global. All rights reserved.
+    </footer>
+
+    <script>lucide.createIcons();</script>
+</body>
+</html>
