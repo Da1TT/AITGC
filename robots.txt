@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://techguidechina.com/sitemap.xml

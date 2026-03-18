@@ -74,7 +74,8 @@ def clean_json_response(text):
     return text.strip()
 
 MAX_RETRIES = 3
-all_cards_html = ""
+MAX_ARTICLES_ON_HOMEPAGE = 30  # Keep homepage fast loading, only show latest 30 articles
+all_new_cards_html = ""
 
 for index, topic in enumerate(niche_topics[:10]):  # Still generate 10 per run
     print(f"\n🚀 Generating Article {index + 1}/10: [{topic}]")
@@ -167,6 +168,13 @@ Output ONLY a valid JSON object with NO extra text before or after. Use this exa
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{data['title']} - TechGuide China</title>
     <meta name="description" content="{data['description']}">
+    <!-- OpenGraph tags for social sharing -->
+    <meta property="og:title" content="{data['title']} - TechGuide China">
+    <meta property="og:description" content="{data['description']}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://techguidechina.com/articles/{file_name}">
+    <meta property="og:image" content="{random_image}">
+    <meta name="twitter:card" content="summary_large_image">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
@@ -263,23 +271,52 @@ Output ONLY a valid JSON object with NO extra text before or after. Use this exa
     </article>
 </a>"""
 
-        all_cards_html += new_article_html + "\n"
+        all_new_cards_html += new_article_html + "\n"
         print("⏳ Sleeping 10 seconds to prevent API Rate Limits...\n")
         time.sleep(10)
 
-if all_cards_html:
+if all_new_cards_html:
     with open('index.html', 'r', encoding='utf-8') as f:
         html_content = f.read()
 
+    # Extract existing article cards after anchor to keep homepage trimmed
     anchor = "<!-- AI_ARTICLE_ANCHOR -->"
-    if anchor in html_content:
-        updated_html = html_content.replace(anchor, f"{anchor}\n{all_cards_html}")
-        with open('index.html', 'w', encoding='utf-8') as f:
-            f.write(updated_html)
-        print("\n🎉 ALL 10 ARTICLES INJECTED SUCCESSFULLY.")
-    else:
+    if anchor not in html_content:
         print("\n❌ FATAL: Anchor <!-- AI_ARTICLE_ANCHOR --> not found in index.html!")
         sys.exit(1)
+    
+    # Split into before anchor and after anchor
+    parts = html_content.split(anchor, 1)
+    before_anchor = parts[0] + anchor + "\n"
+    
+    # Get all existing article cards after anchor
+    existing_cards = parts[1]
+    
+    # Count how many existing articles we have, keep only the latest MAX_ARTICLES_ON_HOMEPAGE
+    # Split by article-card boundary - each card ends with </a>\n    card_pattern = '</a>\n'
+    all_existing_cards = [card + '</a>\n' for card in existing_cards.split(card_pattern) if card.strip()]
+    
+    # Combine new cards + existing cards, then truncate to keep only latest MAX_ARTICLES_ON_HOMEPAGE
+    # Newest articles go first (already the case - new ones are added to top)
+    combined_cards = all_new_cards_html + ''.join(all_existing_cards)
+    all_combined_cards = [card + '</a>\n' for card in combined_cards.split(card_pattern) if card.strip()]
+    
+    # Trim to max articles
+    if len(all_combined_cards) > MAX_ARTICLES_ON_HOMEPAGE:
+        trimmed_cards = all_combined_cards[:MAX_ARTICLES_ON_HOMEPAGE]
+        print(f"\n✂️  Trimmed homepage from {len(all_combined_cards)} to {len(trimmed_cards)} articles (max {MAX_ARTICLES_ON_HOMEPAGE}) for faster loading")
+    else:
+        trimmed_cards = all_combined_cards
+    
+    final_html = before_anchor + ''.join(trimmed_cards)
+    if len(parts) > 2:
+        # In case there's content after the cards
+        final_html += parts[2]
+    
+    with open('index.html', 'w', encoding='utf-8') as f:
+        f.write(final_html)
+    
+    print(f"\n🎉 ALL 10 ARTICLES INJECTED SUCCESSFULLY. Homepage kept at {len(trimmed_cards)} articles maximum.")
 else:
     sys.exit(1)
 
