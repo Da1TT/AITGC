@@ -210,8 +210,28 @@ Output ONLY a valid JSON object with NO extra text before or after. Use this exa
             {data['content']}
         </article>
     </main>
-    <footer class="border-t border-white/5 py-8 text-center text-slate-600 text-sm bg-[#010409]">
-        © 2024 TechGuide China. All rights reserved.
+    <footer class="border-t border-white/5 py-12 px-6 bg-[#010409]">
+        <div class="max-w-3xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="font-bold text-white text-sm">TechGuide China</span>
+                    </div>
+                    <p class="text-slate-500 text-xs">
+                        Your complete directory of AI tools and practical guides for digital entrepreneurs.
+                    </p>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="/" class="text-slate-400 hover:text-white transition-colors text-sm">Home</a>
+                    <a href="/about" class="text-slate-400 hover:text-white transition-colors text-sm">About</a>
+                    <a href="/privacy" class="text-slate-400 hover:text-white transition-colors text-sm">Privacy</a>
+                    <a href="/terms" class="text-slate-400 hover:text-white transition-colors text-sm">Terms</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-white/5 text-center text-slate-600 text-xs">
+                © 2024 TechGuide China. All rights reserved.
+            </div>
+        </div>
     </footer>
     <script>lucide.createIcons();</script>
 </body>
@@ -262,3 +282,72 @@ if all_cards_html:
         sys.exit(1)
 else:
     sys.exit(1)
+
+
+# ==========================================
+# Auto-generate sitemap.xml with all articles
+# ==========================================
+def generate_sitemap(base_url="https://techguidechina.com"):
+    """Generate sitemap.xml including all articles, about, privacy, terms pages."""
+    sitemap_template = """<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{urls}
+</urlset>
+"""
+    
+    url_entries = []
+    today = datetime.now().strftime('%Y-%m-%d')
+    
+    # Add homepage
+    url_entries.append(f"""  <url>
+    <loc>{base_url}/</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.00</priority>
+  </url>""")
+    
+    # Add static pages
+    static_pages = [
+        ("about", "monthly", 0.8),
+        ("privacy", "monthly", 0.8), 
+        ("terms", "monthly", 0.8),
+    ]
+    
+    for page, changefreq, priority in static_pages:
+        url_entries.append(f"""  <url>
+    <loc>{base_url}/{page}</loc>
+    <lastmod>{today}</lastmod>
+    <changefreq>{changefreq}</changefreq>
+    <priority>{priority:.2f}</priority>
+  </url>""")
+    
+    # Add all articles from articles directory
+    articles_dir = 'articles'
+    if os.path.exists(articles_dir):
+        article_files = [f for f in os.listdir(articles_dir) if f.endswith('.html')]
+        print(f"\n🗺️  Generating sitemap with {len(article_files)} articles...")
+        
+        for article_file in article_files:
+            # Get file modification time
+            file_path = os.path.join(articles_dir, article_file)
+            mtime = datetime.fromtimestamp(os.path.getmtime(file_path))
+            lastmod = mtime.strftime('%Y-%m-%d')
+            
+            url = f"{base_url}/articles/{article_file}"
+            url_entries.append(f"""  <url>
+    <loc>{url}</loc>
+    <lastmod>{lastmod}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.60</priority>
+  </url>""")
+    
+    urls_str = "\n".join(url_entries)
+    sitemap_content = sitemap_template.format(urls=urls_str)
+    
+    with open('sitemap.xml', 'w', encoding='utf-8') as f:
+        f.write(sitemap_content)
+    
+    print(f"✅ sitemap.xml generated: {len(url_entries)} total URLs")
+
+# Generate sitemap after all articles are created
+generate_sitemap()
