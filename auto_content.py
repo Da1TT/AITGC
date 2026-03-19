@@ -293,7 +293,8 @@ if all_new_cards_html:
     existing_cards = parts[1]
     
     # Count how many existing articles we have, keep only the latest MAX_ARTICLES_ON_HOMEPAGE
-    # Split by article-card boundary - each card ends with </a>\n    card_pattern = '</a>\n'
+    # Split by article-card boundary - each card ends with </a>
+    card_pattern = '</a>\n'
     all_existing_cards = [card + '</a>\n' for card in existing_cards.split(card_pattern) if card.strip()]
     
     # Combine new cards + existing cards, then truncate to keep only latest MAX_ARTICLES_ON_HOMEPAGE
