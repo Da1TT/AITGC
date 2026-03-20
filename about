@@ -21,6 +21,9 @@
     <style>
         body { font-family: 'Inter', system-ui, sans-serif; }
     </style>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8746884888217292"
+         crossorigin="anonymous"></script>
 </head>
 <body class="bg-[#020617] text-slate-300 min-h-screen flex flex-col">
     <nav class="border-b border-white/5 p-6 bg-dark/95 backdrop-blur-xl sticky top-0 z-50">

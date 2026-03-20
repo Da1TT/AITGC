@@ -191,6 +191,9 @@ Output ONLY a valid JSON object with NO extra text before or after. Use this exa
         .article-body a {{ color: #60a5fa; text-decoration: none; border-bottom: 1px solid #3b82f6; }}
         .article-image-fallback {{ background: linear-gradient(135deg, #1e3a8a 0%, #0f172a 100%); }}
     </style>
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8746884888217292"
+         crossorigin="anonymous"></script>
 </head>
 <body class="bg-dark text-slate-300 min-h-screen flex flex-col">
     <nav class="border-b border-white/5 p-6 bg-dark/95 backdrop-blur-xl sticky top-0 z-50">
