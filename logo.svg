@@ -1,0 +1,32 @@
+<svg width="800" height="200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="techGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0066ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00ccff;stop-opacity:1" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="200" fill="#ffffff" rx="10"/>
+  
+  <!-- AI Icon -->
+  <g transform="translate(40, 40)">
+    <circle cx="60" cy="60" r="50" fill="url(#techGradient)" filter="url(#shadow)"/>
+    <path d="M30 70 L50 40 L70 70 L90 40" stroke="white" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="45" cy="50" r="5" fill="white"/>
+    <circle cx="75" cy="50" r="5" fill="white"/>
+  </g>
+  
+  <!-- Text -->
+  <g transform="translate(180, 75)">
+    <text x="0" y="0" font-family="Arial, Helvetica, sans-serif" font-size="48" font-weight="bold" fill="#1a1a1a">
+      Tech <tspan fill="url(#techGradient)">Guide</tspan>
+    </text>
+    <text x="0" y="30" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="#666666">
+      Your Complete Guide to AI Tools & Making Money Online
+    </text>
+  </g>
+</svg>
