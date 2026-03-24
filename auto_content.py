@@ -240,7 +240,7 @@ Output ONLY a valid JSON object with NO extra text before or after. Use this exa
                 </div>
             </div>
             <div class="mt-8 pt-8 border-t border-white/5 text-center text-slate-600 text-xs">
-                © 2024 TechGuide China. All rights reserved.
+                © 2026 TechGuide China. All rights reserved.
             </div>
         </div>
     </footer>
