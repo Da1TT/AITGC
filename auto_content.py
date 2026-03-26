@@ -34,8 +34,9 @@ client = OpenAI(
     base_url=api_base
 )
 
-# Expanded topic list for continuous generation
+# Expanded topic list for continuous generation (90 topics = 90 days = 3 months)
 niche_topics = [
+    # Original 30 topics
     "AI tools for SEO automation and rapid Google ranking",
     "Monetizing AI art and Midjourney for passive income",
     "Advanced ChatGPT prompt engineering for high-converting copywriting",
@@ -65,7 +66,69 @@ niche_topics = [
     "Legal issues to consider when using AI for content",
     "How to outsource content creation with AI effectively",
     "AI vs human writers: when to use which in 2024",
-    "Case study: how I grew a blog to 10k visits with AI content"
+    "Case study: how I grew a blog to 10k visits with AI content",
+    
+    # 60 new topics for continuous generation
+    "How to use AI for better email marketing campaigns",
+    "AI tools that help you create online courses faster",
+    "Using AI to edit videos and cut content creation time",
+    "How to find profitable affiliate products with AI",
+    "AI-powered grammar checkers compared: Grammarly vs others",
+    "Creating digital products with AI: a complete guide",
+    "How AI changes affiliate marketing for bloggers in 2024",
+    "AI tools for podcasters: from scripting to editing",
+    "Using AI to create lead magnets that actually convert",
+    "How to use AI for A/B testing your landing pages",
+    "Best AI note-taking apps that organize your ideas",
+    "AI project management tools that actually work",
+    "How to create an online course outline with AI",
+    "Using AI to research and write case studies faster",
+    "AI tools for UX design: what actually helps",
+    "How to start a print-on-demand business with AI",
+    "Using AI to create social media content calendars",
+    "AI fact-checking: can you trust AI to verify information",
+    "How to use AI to brainstorm blog post ideas",
+    "Best AI presentation tools that save hours of work",
+    "AI image editing: removing backgrounds and enhancing photos",
+    "How to sell AI-generated art on Etsy in 2024",
+    "AI for copywriting: can it replace human writers",
+    "Using AI to create ebooks and sell them on Amazon",
+    "Best AI coding assistants for developers in 2024",
+    "AI for SEO content writing: best practices and pitfalls",
+    "How to create a unique brand voice with AI help",
+    "AI customer service chatbots for small businesses",
+    "Using AI to do market research for your startup",
+    "Best AI meeting assistants that take notes for you",
+    "How AI helps in freelance writing to boost output",
+    "AI music generators: creating royalty-free music for content",
+    "How to use AI to improve your website conversion rates",
+    "AI translation tools: which is best for content creators",
+    "Creating mobile app prototypes with AI no-code tools",
+    "How to use AI for resume writing and job hunting",
+    "AI resume screeners: what job seekers need to know",
+    "Using AI to predict trending topics before they go viral",
+    "Best AI tools for content creators on a budget",
+    "How to consistently create daily content with AI",
+    "AI and copyright: who owns AI-generated content",
+    "How to grow your personal brand using AI tools",
+    "Using AI to write YouTube video scripts faster",
+    "AI thumbnail generators: do they actually get more clicks",
+    "How to repurpose content with AI from blog to social",
+    "AI for guest post outreach: writing personalized emails",
+    "Best AI stock photo generators that save money",
+    "How to use AI to optimize your website for voice search",
+    "AI predictive analytics for small business marketing",
+    "Using AI to create engaging Instagram captions",
+    "How to start a AI consulting business with no experience",
+    "AI writing detectors: how accurate are they really",
+    "How to avoid AI detection when using AI writing tools",
+    "Using AI to create interactive content like quizzes",
+    "AI and Google SEO: does Google penalize AI content",
+    "How to scale content creation to 10x output with AI",
+    "Building a content site completely with AI: full process",
+    "How to maintain quality when using AI for content",
+    "AI content strategies that still work for Google in 2024",
+    "The future of blogging: AI vs human-written content"
 ]
 
 def clean_json_response(text):
@@ -77,7 +140,33 @@ MAX_RETRIES = 3
 MAX_ARTICLES_ON_HOMEPAGE = 30  # Keep homepage fast loading, only show latest 30 articles
 all_new_cards_html = ""
 
-for index, topic in enumerate(niche_topics[:10]):  # Still generate 10 per run
+# Get list of existing articles to avoid regenerating the same topic
+def topic_already_generated(topic, articles_dir='articles'):
+    """Check if topic has already been generated (by comparing safe filenames)"""
+    safe_title = "".join([c if c.isalnum() or c in '-_' else "-" for c in topic.lower()])
+    safe_title = re.sub(r'-+', '-', safe_title).strip('-')
+    # Check for any file starting with this (variations in title are okay)
+    if not os.path.exists(articles_dir):
+        return False
+    for filename in os.listdir(articles_dir):
+        if filename.endswith('.html') and filename.startswith(safe_title[:20]):
+            return True
+    return False
+
+# Filter out already generated topics
+unused_topics = [t for t in niche_topics if not topic_already_generated(t)]
+print(f"📊 Total topics: {len(niche_topics)}, Already generated: {len(niche_topics) - len(unused_topics)}, Remaining: {len(unused_topics)}")
+
+# If all topics used, start over (cycle through again)
+if len(unused_topics) == 0:
+    print("🔄 All topics generated, starting fresh with full list...")
+    unused_topics = niche_topics.copy()
+
+# Take up to 10 unused topics
+generate_topics = unused_topics[:10]
+print(f"🎯 Generating {len(generate_topics)} articles today")
+
+for index, topic in enumerate(generate_topics):  # Generate up to 10 unused topics per run
     print(f"\n🚀 Generating Article {index + 1}/10: [{topic}]")
 
     prompt = f"""
