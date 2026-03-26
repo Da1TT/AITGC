@@ -34,102 +34,59 @@ client = OpenAI(
     base_url=api_base
 )
 
-# Expanded topic list for continuous generation (90 topics = 90 days = 3 months)
-niche_topics = [
-    # Original 30 topics
-    "AI tools for SEO automation and rapid Google ranking",
-    "Monetizing AI art and Midjourney for passive income",
-    "Advanced ChatGPT prompt engineering for high-converting copywriting",
-    "AI video creation tools for automated YouTube Shorts",
-    "No-code AI app building and SaaS development for beginners",
-    "Harnessing AI for social media management and viral growth",
-    "AI voice cloning tools and audio monetization strategies",
-    "Top AI productivity hacks for digital entrepreneurs",
-    "Using AI models like Claude 3 for data analysis and finance",
-    "How to start and scale an AI Automation Agency (AIAA)",
-    "Best free AI image generators compared in 2024",
-    "How to use AI to write blog posts faster without losing quality",
-    "Building an email list with AI content automation",
-    "AI keyword research tools that actually save time",
-    "How to create and sell AI prompts online for profit",
-    "Top AI Chrome extensions every developer should use",
-    "Using AI for competitive analysis in digital marketing",
-    "How to price AI automation services for clients",
-    "AI content detection tools and how they work",
-    "Passive income with AI: real examples that work today",
-    "SEO mistakes AI tools can automatically fix for you",
-    "How to train custom AI models for your business",
-    "AI web design tools that generate complete websites",
-    "Using AI to find low-competition keywords for blogs",
-    "How to start a AI newsletter and monetize it",
-    "Best AI tools for content rewriting and paraphrasing",
-    "Legal issues to consider when using AI for content",
-    "How to outsource content creation with AI effectively",
-    "AI vs human writers: when to use which in 2024",
-    "Case study: how I grew a blog to 10k visits with AI content",
+def generate_new_topics(client, count=6):
+    """Use AI to generate fresh trending topics for blog articles.
+    This ensures we never run out of topics and can adapt to current trends.
+    """
+    print(f"🤖 Generating {count} fresh trending topics using AI...")
     
-    # 60 new topics for continuous generation
-    "How to use AI for better email marketing campaigns",
-    "AI tools that help you create online courses faster",
-    "Using AI to edit videos and cut content creation time",
-    "How to find profitable affiliate products with AI",
-    "AI-powered grammar checkers compared: Grammarly vs others",
-    "Creating digital products with AI: a complete guide",
-    "How AI changes affiliate marketing for bloggers in 2024",
-    "AI tools for podcasters: from scripting to editing",
-    "Using AI to create lead magnets that actually convert",
-    "How to use AI for A/B testing your landing pages",
-    "Best AI note-taking apps that organize your ideas",
-    "AI project management tools that actually work",
-    "How to create an online course outline with AI",
-    "Using AI to research and write case studies faster",
-    "AI tools for UX design: what actually helps",
-    "How to start a print-on-demand business with AI",
-    "Using AI to create social media content calendars",
-    "AI fact-checking: can you trust AI to verify information",
-    "How to use AI to brainstorm blog post ideas",
-    "Best AI presentation tools that save hours of work",
-    "AI image editing: removing backgrounds and enhancing photos",
-    "How to sell AI-generated art on Etsy in 2024",
-    "AI for copywriting: can it replace human writers",
-    "Using AI to create ebooks and sell them on Amazon",
-    "Best AI coding assistants for developers in 2024",
-    "AI for SEO content writing: best practices and pitfalls",
-    "How to create a unique brand voice with AI help",
-    "AI customer service chatbots for small businesses",
-    "Using AI to do market research for your startup",
-    "Best AI meeting assistants that take notes for you",
-    "How AI helps in freelance writing to boost output",
-    "AI music generators: creating royalty-free music for content",
-    "How to use AI to improve your website conversion rates",
-    "AI translation tools: which is best for content creators",
-    "Creating mobile app prototypes with AI no-code tools",
-    "How to use AI for resume writing and job hunting",
-    "AI resume screeners: what job seekers need to know",
-    "Using AI to predict trending topics before they go viral",
-    "Best AI tools for content creators on a budget",
-    "How to consistently create daily content with AI",
-    "AI and copyright: who owns AI-generated content",
-    "How to grow your personal brand using AI tools",
-    "Using AI to write YouTube video scripts faster",
-    "AI thumbnail generators: do they actually get more clicks",
-    "How to repurpose content with AI from blog to social",
-    "AI for guest post outreach: writing personalized emails",
-    "Best AI stock photo generators that save money",
-    "How to use AI to optimize your website for voice search",
-    "AI predictive analytics for small business marketing",
-    "Using AI to create engaging Instagram captions",
-    "How to start a AI consulting business with no experience",
-    "AI writing detectors: how accurate are they really",
-    "How to avoid AI detection when using AI writing tools",
-    "Using AI to create interactive content like quizzes",
-    "AI and Google SEO: does Google penalize AI content",
-    "How to scale content creation to 10x output with AI",
-    "Building a content site completely with AI: full process",
-    "How to maintain quality when using AI for content",
-    "AI content strategies that still work for Google in 2024",
-    "The future of blogging: AI vs human-written content"
-]
+    prompt = f"""Generate {count} trending, useful blog post topics about AI tools, AI business, AI monetization, and practical AI guides for digital entrepreneurs.
+
+Rules for good topics:
+1. Topics should be specific, actionable, and answer real questions people have
+2. Mix between: AI Tools, AI Business/Monetization, AI Strategies
+3. Include some topics related to current AI trends and new opportunities
+4. Each topic should be 5-15 words, clear and specific
+5. Avoid overly broad topics like "AI is changing everything"
+6. Focus on topics people actually search for and want to read about
+
+Output ONLY a valid JSON array of strings, no extra text. Example:
+["AI tools for SEO automation", "Monetizing AI art with Midjourney", ...]
+"""
+    
+    for attempt in range(3):
+        try:
+            response = client.chat.completions.create(
+                model="moonshot-v1-8k",
+                messages=[
+                    {"role": "system", "content": "You are an expert content strategist for a tech blog. Output ONLY valid JSON."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=1.0,
+                timeout=60.0
+            )
+            raw_content = response.choices[0].message.content
+            cleaned_content = clean_json_response(raw_content)
+            topics = json.loads(cleaned_content)
+            print(f"✅ Generated {len(topics)} fresh topics:")
+            for i, topic in enumerate(topics, 1):
+                print(f"   {i}. {topic}")
+            return topics
+        except Exception as e:
+            print(f"⚠️ Topic generation attempt {attempt + 1} failed: {e}")
+            time.sleep(5)
+    
+    # If AI generation fails, fall back to backup topics
+    print("❌ All topic generation attempts failed, using backup topics")
+    backup_topics = [
+        "AI tools for SEO automation",
+        "Monetizing AI art for passive income",
+        "ChatGPT prompt engineering for copywriting",
+        "AI video tools for YouTube Shorts",
+        "No-code AI app building for beginners",
+        "AI for social media growth"
+    ]
+    return backup_topics[:count]
 
 def clean_json_response(text):
     text = re.sub(r'```json\s*', '', text)
@@ -137,6 +94,7 @@ def clean_json_response(text):
     return text.strip()
 
 MAX_RETRIES = 3
+DAILY_GENERATE_COUNT = 6  # Generate 6 articles per day (was 10)
 MAX_ARTICLES_ON_HOMEPAGE = 30  # Keep homepage fast loading, only show latest 30 articles
 all_new_cards_html = ""
 
@@ -153,21 +111,19 @@ def topic_already_generated(topic, articles_dir='articles'):
             return True
     return False
 
-# Filter out already generated topics
-unused_topics = [t for t in niche_topics if not topic_already_generated(t)]
-print(f"📊 Total topics: {len(niche_topics)}, Already generated: {len(niche_topics) - len(unused_topics)}, Remaining: {len(unused_topics)}")
+# Generate fresh trending topics using AI (never runs out!)
+generate_topics = generate_new_topics(client, count=DAILY_GENERATE_COUNT)
 
-# If all topics used, start over (cycle through again)
-if len(unused_topics) == 0:
-    print("🔄 All topics generated, starting fresh with full list...")
-    unused_topics = niche_topics.copy()
+# Filter out any that already exist (just to be safe)
+generate_topics = [t for t in generate_topics if not topic_already_generated(t)]
+if len(generate_topics) == 0:
+    print("❌ All generated topics already exist, exiting")
+    sys.exit(1)
 
-# Take up to 10 unused topics
-generate_topics = unused_topics[:10]
 print(f"🎯 Generating {len(generate_topics)} articles today")
 
-for index, topic in enumerate(generate_topics):  # Generate up to 10 unused topics per run
-    print(f"\n🚀 Generating Article {index + 1}/10: [{topic}]")
+for index, topic in enumerate(generate_topics):
+    print(f"\n🚀 Generating Article {index + 1}/{len(generate_topics)}: [{topic}]")
 
     prompt = f"""
 You are a veteran tech blogger with 10+ years of experience. Write a comprehensive, in-depth blog post STRICTLY about: "{topic}".
@@ -364,8 +320,8 @@ Output ONLY a valid JSON object with NO extra text before or after. Use this exa
 </a>"""
 
         all_new_cards_html += new_article_html + "\n"
-        print("⏳ Sleeping 10 seconds to prevent API Rate Limits...\n")
-        time.sleep(10)
+        print("⏳ Sleeping 15 seconds to prevent API Rate Limits...\n")
+        time.sleep(15)
 
 if all_new_cards_html:
     with open('index.html', 'r', encoding='utf-8') as f:
@@ -409,7 +365,7 @@ if all_new_cards_html:
     with open('index.html', 'w', encoding='utf-8') as f:
         f.write(final_html)
     
-    print(f"\n🎉 ALL 10 ARTICLES INJECTED SUCCESSFULLY. Homepage kept at {len(trimmed_cards)} articles maximum.")
+    print(f"\n🎉 ALL {len(generate_topics)} ARTICLES INJECTED SUCCESSFULLY. Homepage kept at {len(trimmed_cards)} articles maximum.")
 else:
     sys.exit(1)
 
