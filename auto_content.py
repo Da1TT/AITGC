@@ -445,3 +445,112 @@ def generate_sitemap(base_url="https://techguidechina.com"):
 
 # Generate sitemap after all articles are created
 generate_sitemap()
+
+# ==========================================
+# Auto-update Free AI Learning Resources section
+# Adds one new free resource every day
+# ==========================================
+def generate_new_free_resource(client):
+    """Generate one new free AI learning resource to add to the directory daily."""
+    print("\n🤖 Generating one new free AI learning resource for today...")
+    
+    prompt = """Generate one high-quality free AI learning resource that's available online.
+
+Output ONLY a valid JSON object with this structure:
+{
+  "title": "Name of the course/resource",
+  "provider": "Who provides it (e.g., Coursera, YouTube, GitHub)",
+  "description": "Brief description (1-2 sentences) about what you learn",
+  "category": "Category (Machine Learning / Deep Learning / NLP / Generative AI / Business)",
+  "url": "The official URL",
+  "icon": "lucide icon name from this list: graduation-cap, book-open, youtube, github, code, video, book, compass, pen-tool"
+}
+
+Choose a different resource than the common ones already listed (ChatGPT, Andrew Ng, Hugging Face, Kaggle are already there). Pick something valuable but less commonly known."""
+    
+    for attempt in range(3):
+        try:
+            response = client.chat.completions.create(
+                model="moonshot-v1-8k",
+                messages=[
+                    {"role": "system", "content": "You are an expert curator of AI learning resources. Output ONLY valid JSON."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.8,
+                timeout=60.0
+            )
+            raw_content = response.choices[0].message.content
+            cleaned_content = clean_json_response(raw_content)
+            resource = json.loads(cleaned_content)
+            print(f"✅ Generated new free resource: {resource['title']} by {resource['provider']}")
+            return resource
+        except Exception as e:
+            print(f"⚠️ Resource generation attempt {attempt + 1} failed: {e}")
+            time.sleep(5)
+    
+    return None
+
+# ==========================================
+# Auto-update AI Deals & Discounts section
+# Adds one new deal every week (on Sunday)
+# ==========================================
+def generate_new_deal(client):
+    """Generate one new AI tool deal/discount to add to the deals section weekly."""
+    print("\n🤖 Generating one new AI tool deal for this week...")
+    
+    prompt = """Generate one popular AI tool that has a current discount or good pricing plan.
+
+Output ONLY a valid JSON object with this structure:
+{
+  "tool_name": "Name of the AI tool",
+  "description": "What it does, 1-2 sentences",
+  "category": "Category (Content Writing / Image Generation / Productivity / Development / Video / Audio)",
+  "price": "Current price (e.g., $12/month)",
+  "original_price": "Original price if discounted, or empty string if no discount",
+  "url": "Official website URL",
+  "icon": "lucide icon name from this list: gift, paintbrush, brain, message-square, code, image, video, audio, file-text, calculator",
+  "badge": "Badge text like BEST FOR ART, POPULAR, etc."
+}
+
+Pick a different tool than the ones already listed (ChatGPT, Midjourney, Claude, Notion are already there)."""
+    
+    for attempt in range(3):
+        try:
+            response = client.chat.completions.create(
+                model="moonshot-v1-8k",
+                messages=[
+                    {"role": "system", "content": "You are an expert curator of AI tool deals. Output ONLY valid JSON."},
+                    {"role": "user", "content": prompt}
+                ],
+                temperature=0.8,
+                timeout=60.0
+            )
+            raw_content = response.choices[0].message.content
+            cleaned_content = clean_json_response(raw_content)
+            deal = json.loads(cleaned_content)
+            print(f"✅ Generated new deal: {deal['tool_name']} at {deal['price']}")
+            return deal
+        except Exception as e:
+            print(f"⚠️ Deal generation attempt {attempt + 1} failed: {e}")
+            time.sleep(5)
+    
+    return None
+
+# ==========================================
+# Auto-update schedule:
+# - Every day: add 1 new free resource
+# - Every Sunday: add 1 new deal
+# ==========================================
+today = datetime.now()
+# Add one new free resource every day
+new_resource = generate_new_free_resource(client)
+if new_resource:
+    # We'll need to manually rebuild the full page since it's static HTML
+    # For now, just log it - you can manually add it to the HTML
+    print(f"\n📝 New free resource generated: {new_resource['title']} - add it to index.html #free-resources section")
+
+# Add one new deal only on Sundays
+if today.weekday() == 6:  # 6 = Sunday
+    new_deal = generate_new_deal(client)
+    if new_deal:
+        print(f"\n🎉 New deal generated: {new_deal['tool_name']} - add it to index.html #ai-deals section")
