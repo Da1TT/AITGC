@@ -94,7 +94,7 @@ def clean_json_response(text):
     return text.strip()
 
 MAX_RETRIES = 3
-DAILY_GENERATE_COUNT = 6  # Generate 6 articles per day (was 10)
+DAILY_GENERATE_COUNT = 2  # Generate 2 high-quality articles per day (was 6) - quality over quantity for AdSense
 MAX_ARTICLES_ON_HOMEPAGE = 30  # Keep homepage fast loading, only show latest 30 articles
 all_new_cards_html = ""
 
@@ -128,11 +128,17 @@ for index, topic in enumerate(generate_topics):
     prompt = f"""
 You are a veteran tech blogger with 10+ years of experience. Write a comprehensive, in-depth blog post STRICTLY about: "{topic}".
 
-=== WRITING RULES - FOLLOW THESE EXACTLY TO AVOID AI DETECTION ===
-1. WORD COUNT: Minimum 800 words, target 1000-1200 words. Longer = better for SEO.
-2. TONE: Conversational, personal, opinionated. Use "I" and "you" frequently. Share personal experiences and anecdotes.
-3. VARIETY: Mix short sentences (3-5 words) with long ones. Vary paragraph length (1-5 sentences). This creates "burstiness" that avoids AI detection.
-4. FORBIDDEN AI CLICHES: Never use any of these:
+=== WRITING RULES - FOLLOW THESE EXACTLY TO MEET GOOGLE ADSENSE STANDARDS ===
+1. WORD COUNT: Minimum 1500 words, target 1800-2500 words. Longer, comprehensive content ranks better and meets AdSense requirements.
+2. DEPTH & VALUE: 
+   - Cover the topic comprehensively, don't just scratch the surface
+   - Include actionable steps readers can actually follow
+   - Add specific examples, tool recommendations, and practical tips
+   - Share common mistakes to avoid
+   - Include pro tips from real-world experience
+3. TONE: Conversational, personal, opinionated. Use "I" and "you" frequently. Share personal experiences and anecdotes.
+4. VARIETY: Mix short sentences (3-5 words) with long ones. Vary paragraph length (1-5 sentences). This creates "burstiness" that avoids AI detection.
+5. FORBIDDEN AI CLICHES: Never use any of these:
    - "In today's fast-paced digital world"
    - "Unlock the power of"
    - "Revolutionize your"
@@ -143,13 +149,15 @@ You are a veteran tech blogger with 10+ years of experience. Write a comprehensi
    - "Stay tuned"
    - "Without further ado"
    - "Hope you enjoy"
-5. STRUCTURE:
+6. STRUCTURE:
    - Start with a hook: share a quick personal observation or story
-   - Break into at least 4-6 subheadings with <h2> tags
-   - Include at least one bullet-point list
+   - Break into at least 6-8 subheadings with <h2> tags
+   - Include at least two bullet-point or numbered lists
+   - Add a section about common mistakes or challenges
+   - Include a step-by-step guide or actionable framework
    - End with a conclusion that gives a clear takeaway or recommendation
-   - Add specific examples, tool names, and approximate numbers
-6. ORIGINALITY: Write unique content that hasn't been written the same way a thousand times before. Add your unique "voice".
+   - Add specific examples, tool names, pricing estimates, and results you can expect
+7. ORIGINALITY: Write unique content that hasn't been written the same way a thousand times before. Add your unique "voice" and perspective.
 
 === OUTPUT FORMAT ===
 Output ONLY a valid JSON object with NO extra text before or after. Use this exact structure:
