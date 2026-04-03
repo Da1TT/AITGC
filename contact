@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - TechGuide</title>
+    <meta name="description" content="Get in touch with TechGuide. For business cooperation, advertising inquiries, or content suggestions.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        dark: '#020617',
+                        primary: '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark text-slate-300 min-h-screen flex flex-col">
+    <!-- Navigation -->
+    <nav class="border-b border-white/5 p-6 bg-dark/95 backdrop-blur-xl sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex items-center justify-between">
+            <a href="/" class="flex items-center gap-3">
+                <img src="/logo.svg" alt="TechGuide" class="h-10"/>
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="/" class="text-slate-300 hover:text-white transition-colors font-medium">Home</a>
+                <a href="#ai-tools-directory" class="text-slate-400 hover:text-white transition-colors">AI Tools Directory</a>
+                <a href="#free-resources" class="text-slate-400 hover:text-white transition-colors">📚 Free Resources</a>
+                <a href="/about" class="text-slate-400 hover:text-white transition-colors">About</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contact Section -->
+    <main class="flex-grow py-16 px-6">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-6">Contact Us</h1>
+                <p class="text-xl text-slate-400">Have questions, suggestions, or business inquiries? We'd love to hear from you.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Get In Touch</h2>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-blue-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="mail" class="w-5 h-5 text-blue-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-white mb-1">Email</h3>
+                                <p class="text-slate-400">For business cooperation, advertising inquiries, and content suggestions:</p>
+                                <p class="text-blue-400 mt-1">contact@techguidechina.com</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-green-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="github" class="w-5 h-5 text-green-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-white mb-1">GitHub</h3>
+                                <p class="text-slate-400">Report issues or contribute to the project:</p>
+                                <p class="text-blue-400 mt-1">github.com/techguidechina</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 bg-purple-500/20 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <i data-lucide="advert" class="w-5 h-5 text-purple-400"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-white mb-1">Advertising</h3>
+                                <p class="text-slate-400">For advertising opportunities and partnerships:</p>
+                                <p class="text-blue-400 mt-1">advertising@techguidechina.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h2 class="text-2xl font-bold text-white mb-6">Send a Message</h2>
+                    <form class="space-y-4">
+                        <div>
+                            <label for="name" class="block text-sm font-medium text-slate-300 mb-2">Your Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Your name">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-slate-300 mb-2">Email Address</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="your@email.com">
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium text-slate-300 mb-2">Subject</label>
+                            <input type="text" id="subject" name="subject" class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="How can we help you?">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-slate-300 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-2 bg-slate-800 border border-slate-700 rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Your message..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full px-6 py-3 bg-primary hover:bg-primary/90 text-white font-semibold rounded-lg transition-all shadow-lg shadow-primary/20 hover:shadow-xl hover:shadow-primary/30">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="border-t border-white/5 py-12 px-6 bg-dark/95">
+        <div class="max-w-6xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-white font-bold text-lg mb-4">TechGuide China</h3>
+                    <p class="text-slate-400 text-sm">Your complete guide to AI tools and practical AI development.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Pages</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/about" class="text-slate-400 hover:text-white transition-colors">About</a></li>
+                        <li><a href="/contact" class="text-slate-400 hover:text-white transition-colors">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Legal</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="/privacy" class="text-slate-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="/terms" class="text-slate-400 hover:text-white transition-colors">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-white font-semibold mb-3">Updated</h4>
+                    <p class="text-slate-400 text-sm">Daily updates with fresh AI content</p>
+                </div>
+            </div>
+            <div class="border-t border-white/5 mt-8 pt-8 text-center text-slate-500 text-sm">
+                &copy; 2026 TechGuide China. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+<script>
+  lucide.createIcons();
+</script>
+</body>
+</html>

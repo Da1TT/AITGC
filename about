@@ -78,6 +78,50 @@
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
                 <div>
                     <div class="flex items-center gap-2 mb-2">
+
+            <h2 class="text-2xl font-bold text-white mt-12 mb-4">Why "TechGuide China"?</h2>
+            <p class="text-lg leading-relaxed">
+                Tech Guide China was created to systematically curate and organize the world's cutting-edge AI knowledge and practical tutorials for the global bilingual technical community. We bring you the latest AI developments, tool reviews, and practical strategies from the global tech scene, organized in clear English for accessibility to AI enthusiasts around the world.
+            </p>
+
+            <p class="text-lg leading-relaxed">
+                Our mission is to cut through the hype and deliver practical, step-by-step guidance that you can actually use to build with AI. Whether you're just getting started or you're an experienced practitioner, you'll find valuable content here.
+            </p>
+
+            </p>
+
+            <h2 class="text-2xl font-bold text-white mt-12 mb-4">What You'll Find Here</h2>
+
+            <ul class="list-disc pl-6 space-y-3 text-lg">
+                <li>Deep dives into the latest AI tools and how to use them effectively</li>
+                <li>Proven strategies for making money online with AI and automation</li>
+                <li>Step-by-step tutorials for beginners and experienced developers alike</li>
+                <li>Insights on industry trends before they go mainstream</li>
+                <li>Honest reviews of AI tools and services you're considering</li>
+                <li>Curated directory of the best AI tools across every category</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold text-white mt-12 mb-4">Why TechGuide?</h2>
+            <p class="text-lg leading-relaxed">
+                We publish new content regularly, so you'll always find the latest information here. Our focus is on practical, actionable advice that you can actually use — no hype, just real-world experience and honest opinions.
+            </p>
+
+            <h2 class="text-2xl font-bold text-white mt-12 mb-4">Contact</h2>
+            <p class="text-lg">
+                If you have any questions, suggestions, or just want to get in touch, you can email us at: <a href="mailto:hello@techguidechina.com" class="text-primary hover:underline">hello@techguidechina.com</a>
+            </p>
+
+            <p class="text-lg mt-8">
+                Thanks for visiting!
+            </p>
+        </div>
+    </main>
+
+    <footer class="border-t border-white/5 py-12 px-6 bg-[#010409]">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
                         <span class="font-bold text-white text-sm">TechGuide China</span>
                     </div>
                     <p class="text-slate-500 text-xs">
