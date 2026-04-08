@@ -258,20 +258,20 @@ Output ONLY a valid JSON object with NO extra text before or after. Use this exa
 
     date_str = datetime.now().strftime('%b %d')
 
-        # Use Picsum Photos for stable image hosting - reliable CDN that works globally
-        # Fallback to a solid colored background if no image
-        image_keywords = data.get('image_keywords', topic.split(',')[0])
-        # Get random image from Picsum based on seed = hash(image_keywords)
-        seed = sum(ord(c) for c in image_keywords) % 1000
-        random_image = f"https://picsum.photos/seed/{seed}/800/500"
+    # Use Picsum Photos for stable image hosting - reliable CDN that works globally
+    # Fallback to a solid colored background if no image
+    image_keywords = data.get('image_keywords', topic.split(',')[0])
+    # Get random image from Picsum based on seed = hash(image_keywords)
+    seed = sum(ord(c) for c in image_keywords) % 1000
+    random_image = f"https://picsum.photos/seed/{seed}/800/500"
 
 
-        # If still fails, CSS gradient background will show
-        safe_title = "".join([c if c.isalnum() or c in '-_' else "-" for c in data['title'].lower()])
-        safe_title = re.sub(r'-+', '-', safe_title).strip('-')
-        file_name = f"{safe_title}.html"
+    # If still fails, CSS gradient background will show
+    safe_title = "".join([c if c.isalnum() or c in '-_' else "-" for c in data['title'].lower()])
+    safe_title = re.sub(r'-+', '-', safe_title).strip('-')
+    file_name = f"{safe_title}.html"
 
-        os.makedirs('articles', exist_ok=True)
+    os.makedirs('articles', exist_ok=True)
 
         article_page_html = f"""<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
