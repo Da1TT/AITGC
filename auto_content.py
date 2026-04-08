@@ -273,7 +273,7 @@ Output ONLY a valid JSON object with NO extra text before or after. Use this exa
 
     os.makedirs('articles', exist_ok=True)
 
-        article_page_html = f"""<!DOCTYPE html>
+article_page_html = f"""<!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
@@ -290,7 +290,7 @@ Output ONLY a valid JSON object with NO extra text before or after. Use this exa
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script>
-        tailwind.config = {{ theme: {{ extend: {{ colors: {{ dark: '#020617', primary: '#3b82f6' }} }} }} }}
+tailwind.config = {{ theme: {{ extend: {{ colors: {{ dark: '#020617', primary: '#3b82f6' }} }} }} }}
     </script>
     <style>
         body {{ font-family: 'Inter', system-ui, -apple-system, sans-serif; }}
