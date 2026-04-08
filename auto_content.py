@@ -404,8 +404,20 @@ if all_new_cards_html:
     parts = html_content.split(anchor, 1)
     before_anchor = parts[0] + anchor + "\n"
     
-    # Get all existing article cards after anchor
-    existing_cards = parts[1]
+    # Get everything after anchor, extract only the existing article cards
+    # Everything after </div> closing the article-grid should be preserved
+    after_anchor = parts[1]
+    
+    # Find the closing </div> for #article-list after the anchor
+    # We need to keep that structure intact
+    grid_close_pos = after_anchor.find('</div>')
+    if grid_close_pos == -1:
+        # Can't find closing div, assume it's after all cards
+        existing_cards = after_anchor
+        after_grid = ''
+    else:
+        existing_cards = after_anchor[:grid_close_pos]
+        after_grid = after_anchor[grid_close_pos:]
     
     # Count how many existing articles we have, keep only the latest MAX_ARTICLES_ON_HOMEPAGE
     # Split by article-card boundary - each card ends with </a>
@@ -424,10 +436,8 @@ if all_new_cards_html:
     else:
         trimmed_cards = all_combined_cards
     
-    final_html = before_anchor + ''.join(trimmed_cards)
-    if len(parts) > 2:
-        # In case there's content after the cards
-        final_html += parts[2]
+    # Reconstruct the full HTML keeping the correct container structure
+    final_html = before_anchor + ''.join(trimmed_cards) + after_grid
     
     with open('index.html', 'w', encoding='utf-8') as f:
         f.write(final_html)
