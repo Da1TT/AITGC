@@ -91,7 +91,43 @@ Output ONLY a valid JSON array of strings, no extra text. Example:
 def clean_json_response(text):
     text = re.sub(r'```json\s*', '', text)
     text = re.sub(r'```\s*', '', text)
-    return text.strip()
+    text = text.strip()
+    # Remove any text before the first { and after the last }
+    start = text.find('{')
+    end = text.rfind('}')
+    if start != -1 and end != -1 and end > start:
+        text = text[start:end+1]
+    # Fix trailing commas before closing brackets
+    text = re.sub(r',\s*([}\]])', r'\1', text)
+    # Fix unescaped double quotes inside string content
+    # This handles the common case where AI outputs HTML without escaping quotes in JSON
+    text = fix_unescaped_quotes(text)
+    return text
+
+def fix_unescaped_quotes(text):
+    """Fix common JSON issue: unescaped double quotes inside strings."""
+    # Strategy: find string openings and closings, escape quotes that are inside
+    result = []
+    in_string = False
+    i = 0
+    n = len(text)
+    while i < n:
+        char = text[i]
+        if char == '"' and (i == 0 or text[i-1] != '\\'):
+            if in_string:
+                # End of string
+                in_string = False
+            else:
+                # Start of string
+                in_string = True
+            result.append(char)
+        elif char == '"' and in_string and i > 0 and text[i-1] != '\\':
+            # Unescaped quote inside string - escape it
+            result.append('\\"')
+        else:
+            result.append(char)
+        i += 1
+    return ''.join(result)
 
 MAX_RETRIES = 3
 DAILY_GENERATE_COUNT = 2  # Generate 2 high-quality articles per day (was 6) - quality over quantity for AdSense
@@ -112,13 +148,25 @@ def topic_already_generated(topic, articles_dir='articles'):
     return False
 
 # Generate fresh trending topics using AI (never runs out!)
-generate_topics = generate_new_topics(client, count=DAILY_GENERATE_COUNT)
+generate_topics = generate_new_topics(client, count=DAILY_GENERATE_COUNT * 3)
 
 # Filter out any that already exist (just to be safe)
 generate_topics = [t for t in generate_topics if not topic_already_generated(t)]
 if len(generate_topics) == 0:
-    print("❌ All generated topics already exist, exiting")
-    sys.exit(1)
+    print("⚠️ All generated topics already exist, trying backup topics...")
+    backup_topics = [
+        "AI tools for SEO automation",
+        "Monetizing AI art for passive income",
+        "ChatGPT prompt engineering for copywriting",
+        "AI video tools for YouTube Shorts",
+        "No-code AI app building for beginners",
+        "AI for social media growth"
+    ]
+    generate_topics = [t for t in backup_topics if not topic_already_generated(t)][:DAILY_GENERATE_COUNT]
+    if len(generate_topics) == 0:
+        print("❌ All backup topics also exist, exiting")
+        sys.exit(1)
+    print(f"✅ Using {len(generate_topics)} backup topics")
 
 print(f"🎯 Generating {len(generate_topics)} articles today")
 
@@ -186,18 +234,29 @@ Output ONLY a valid JSON object with NO extra text before or after. Use this exa
 
             raw_content = response.choices[0].message.content
             cleaned_content = clean_json_response(raw_content)
-            data = json.loads(cleaned_content)
-            print(f"✅ Success: {data['title']}")
-            break
-
+            try:
+                data = json.loads(cleaned_content)
+                print(f"✅ Success: {data['title']}")
+                break
+            except json.JSONDecodeError as e:
+                print(f"⚠️ JSON parse attempt {attempt + 1} failed: {e}")
+                # Try one more aggressive cleaning - extract content manually if possible
+                import traceback
+                traceback.print_exc()
+                if attempt == MAX_RETRIES - 1:
+                    print(f"❌ Skipping article {index + 1} due to JSON parsing failure.")
+                time.sleep(5)
         except Exception as e:
             print(f"⚠️ Attempt {attempt + 1} failed: {e}")
             if attempt == MAX_RETRIES - 1:
-                print(f"❌ Skipping article {index + 1} due to network failure.")
+                print(f"❌ Skipping article {index + 1} due to network/parsing failure.")
             time.sleep(5)
 
-    if data:
-        date_str = datetime.now().strftime('%b %d')
+    if not data:
+        print(f"⚠️ Skipping article {index + 1} — moving to next topic")
+        continue
+
+    date_str = datetime.now().strftime('%b %d')
 
         # Use Picsum Photos for stable image hosting - reliable CDN that works globally
         # Fallback to a solid colored background if no image
@@ -375,6 +434,7 @@ if all_new_cards_html:
     
     print(f"\n🎉 ALL {len(generate_topics)} ARTICLES INJECTED SUCCESSFULLY. Homepage kept at {len(trimmed_cards)} articles maximum.")
 else:
+    print("❌ No articles were successfully generated, exiting without modifying homepage")
     sys.exit(1)
 
 
