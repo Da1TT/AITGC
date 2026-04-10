@@ -160,13 +160,28 @@ if len(generate_topics) == 0:
         "ChatGPT prompt engineering for copywriting",
         "AI video tools for YouTube Shorts",
         "No-code AI app building for beginners",
-        "AI for social media growth"
+        "AI for social media growth",
+        "AI writing tools for content creators",
+        "AI podcast tools for beginners",
+        "AI SEO tools that actually work in 2025",
+        "Building an AI content agency",
+        "AI product photography for e-commerce",
+        "ChatGPT vs Claude which is better",
+        "AI automation for small business",
+        "Using AI for keyword research",
+        "How to create AI YouTube faceless channels",
+        "AI grammar checkers compared"
     ]
     generate_topics = [t for t in backup_topics if not topic_already_generated(t)][:DAILY_GENERATE_COUNT]
     if len(generate_topics) == 0:
-        print("❌ All backup topics also exist, exiting")
-        sys.exit(1)
-    print(f"✅ Using {len(generate_topics)} backup topics")
+        print("⚠️ All backup topics also exist, generating more topics with AI...")
+        # If even backup topics are full, generate more topics recursively
+        extra_topics = generate_new_topics(client, count=10)
+        generate_topics = [t for t in extra_topics if not topic_already_generated(t)][:DAILY_GENERATE_COUNT]
+        if len(generate_topics) == 0:
+            print("❌ Failed to generate any new topics, exiting")
+            sys.exit(1)
+    print(f"✅ Using {len(generate_topics)} new topics")
 
 print(f"🎯 Generating {len(generate_topics)} articles today")
 
